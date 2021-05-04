@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 /**
  * Class NoMansBudget - Creates a two dimensional solar system containing
  * planets orbiting around a star. The planets are clickable and if a planet is
@@ -10,66 +12,66 @@
  */
 public class NoMansBudget implements Runnable {
     private Display display;
-    private boolean run = false;
     private Thread thread;
 
+    private boolean run = false;
 
     public NoMansBudget() {
-        start();
+        this.startProgram();
     }
 
     public static void main(String[] args) {
         NoMansBudget program = new NoMansBudget();
     }
-    // updates the state of the game 
-    private void update(){
-          
-        
-    }
-    // renders the update to the display
-    private void render(){
 
-    }
-    private void initialize(){
-        this.display = new Display();
+    // Calling this method starts the game in a new thread
+    public synchronized void startProgram() {
+        // do nothing if the game is already running
+        if (run) {
+            return;
+        }
 
+        this.thread = new Thread(this);
+        this.thread.start();
     }
 
-    public void run(){
+    // stops the game
+    public synchronized void stopProgram() {
+        if (!run) {
+            return;
+        }
+
+        try {
+            this.thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void run() {
         // Opens the game window
-        initialize();  
+        initialize();
         // The game loop. Runs until run becomes false
-        while(run){
+        while (run) {
             update();
             render();
-
         }
-        stop();
+
+        stopProgram();
+    }
+
+    private void initialize() {
+        this.display = new Display(Color.BLACK);
+    }
+
+    // updates the state of the game
+    private void update() {
 
     }
-    // Calling this method starts the game in a new thread
-    public synchronized void start(){
-        // do nothing if the game is already running
-        if(run){
-            return;
-        }
-        thread = new Thread(this);
-        thread.start();
 
-    }
-    // stops the game
-    public synchronized void stop(){
-        if(!run){
-            return;
-        }
-        try{
-            thread.join();
-        }
-        catch (Exception e){
+    // renders the update to the display
+    private void render() {
 
-        }
-        
-        
     }
 }
-

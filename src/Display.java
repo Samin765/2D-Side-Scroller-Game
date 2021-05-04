@@ -8,21 +8,18 @@ public class Display extends Canvas {
     private JFrame frame;
     private Dimension size;
     private Canvas canvas;
-  
 
     private static String title = "No man's budget";
     static final int WIDTH = 1000;
     static final int HEIGHT = 800;
 
-    public Display() {
+    public Display(Color color) {
         // Creates the window's frame and dimension
         this.frame = new JFrame();
         this.size = new Dimension(WIDTH, HEIGHT);
-        
 
         // Sets the window's title
         this.frame.setTitle(title);
-        
 
         // Sets the window's size
         this.setPreferredSize(size);
@@ -36,14 +33,10 @@ public class Display extends Canvas {
         this.frame.setLocationRelativeTo(null);
         this.frame.setResizable(false);
 
-        this.frame.setBackground(Color.CYAN);
+        // Sets the window's background colour
+        this.frame.setBackground(color);
 
         // Enable visibility
         this.frame.setVisible(true);
-
-        canvas = new Canvas();
-        canvas.setPreferredSize(size);
-
-        frame.add(canvas);
     }
 }

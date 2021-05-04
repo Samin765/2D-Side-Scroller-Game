@@ -62,7 +62,9 @@ public class NoMansBudget implements Runnable {
     }
 
     private void initialize() {
-        this.display = new Display(Color.BLACK);
+        this.display = new Display("../spaceStars.jpeg");
+
+        // this.display = new Display(Color.CYAN);
     }
 
     // updates the state of the game

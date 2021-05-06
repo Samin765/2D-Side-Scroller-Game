@@ -43,8 +43,8 @@ public class Display extends Canvas {
         this.frame.add(this);
         this.frame.pack();
 
-        // Enables shutdown of program
-        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // Program exist when window is closed
+        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 
         // Sets the window's location to center
         this.frame.setLocationRelativeTo(null);

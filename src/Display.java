@@ -27,7 +27,7 @@ public class Display extends Canvas {
     static final int WIDTH = 1280;
     static final int HEIGHT = 720;
 
-    public Display(Color color) {
+    public Display() {
         // Creates the window's frame and dimension
         frame = new JFrame();
         size = new Dimension(WIDTH, HEIGHT);
@@ -39,13 +39,9 @@ public class Display extends Canvas {
         // Sets the window's title
         this.frame.setTitle(title);
 
-        //this.frame.setSize(size);
-
-
         // Sets the window's size
         this.frame.setPreferredSize(size);
-        //this.frame.add(this);
-        //this.frame.pack();
+        this.frame.setSize(size);
 
         // Program exist when window is closed
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
@@ -53,9 +49,6 @@ public class Display extends Canvas {
         // Sets the window's location to center
         this.frame.setLocationRelativeTo(null);
 
-        // Sets the window's background colour
-        //this.frame.setBackground(color);
-
         // Enable visibility
         this.frame.setVisible(true);
 
@@ -67,57 +60,6 @@ public class Display extends Canvas {
         
         this.frame.add(canvas);
         this.frame.pack();
-
-        
-       
-    }
-
-    /**
-     * Creates a window with an image as a background
-     * 
-     * @param img
-     */
-    public Display(String img) {
-        // Creates the window's frame and dimension
-        this.frame = new JFrame();
-
-        // Sets the windows icon image  
-        ImageIcon windowsIcon = new ImageIcon("../windowsIcon.png");
-        frame.setIconImage(windowsIcon.getImage());
-
-        // Sets the window's title
-        this.frame.setTitle(title);
-
-        // Sets the window's background image
-        try {
-            this.frame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File(img)))));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        this.frame.add(this);
-
-      
-
-        // Program exist when window is closed
-        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Sets the window's location to center
-        this.frame.setLocationRelativeTo(null);
-        this.frame.setResizable(false);
-
-        // Enable visibility
-        this.frame.setVisible(true);
-        
-        // Creates the canvas
-        this.canvas = new Canvas();
-        this.canvas.setPreferredSize(size);
-        this.canvas.setMaximumSize(size);
-        this.canvas.setMinimumSize(size);
-        
-        this.frame.add(canvas);
-        this.frame.pack();
-
     }
 
     public Canvas getCanvas(){

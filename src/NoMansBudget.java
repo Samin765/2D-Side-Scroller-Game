@@ -118,7 +118,7 @@ public class NoMansBudget implements Runnable {
     private void initialize() {
         //display = new Display("../spaceStars.jpeg");
       
-         display = new Display(Color.CYAN);
+         display = new Display();
     }
 
     // updates the state of the game

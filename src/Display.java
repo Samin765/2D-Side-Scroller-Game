@@ -32,6 +32,11 @@ public class Display extends Canvas {
         this.frame = new JFrame();
         this.size = new Dimension(WIDTH, HEIGHT);
 
+        // Creates the canvas
+        canvas = new Canvas();
+        canvas.setPreferredSize(size);
+        this.frame.add(canvas);
+
         // Sets the window's title
         this.frame.setTitle(title);
 
@@ -52,6 +57,9 @@ public class Display extends Canvas {
 
         // Enable visibility
         this.frame.setVisible(true);
+
+        
+       
     }
 
     /**
@@ -62,6 +70,16 @@ public class Display extends Canvas {
     public Display(String img) {
         // Creates the window's frame and dimension
         this.frame = new JFrame();
+
+        // Sets the windows icon image  
+        ImageIcon windowsIcon = new ImageIcon("../windowsIcon.png");
+        frame.setIconImage(windowsIcon.getImage());
+
+
+        // Creates the canvas
+        canvas = new Canvas();
+        canvas.setPreferredSize(size);
+        this.frame.add(canvas);
 
         // Sets the window's title
         this.frame.setTitle(title);
@@ -85,5 +103,11 @@ public class Display extends Canvas {
 
         // Enable visibility
         this.frame.setVisible(true);
+
+
+    }
+
+    public Canvas getCanvas(){
+        return canvas;
     }
 }

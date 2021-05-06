@@ -23,31 +23,34 @@ public class NoMansBudget implements Runnable {
     private BufferStrategy windowTick;
 
     // Sets the FPS (numbers of times render() is called in the game loop)
-    static final int fps = 25;
+    static final int fps = 1;
     static final int ticks = 1000/fps;
 
-    
-    private Graphics graphic;
+    // Creates the images that will be sent to the canvas
+    private Graphics graphic; 
 
 
 
     public NoMansBudget() {
         this.startProgram();
+    
     }
 
     public static void main(String[] args) {
         NoMansBudget program = new NoMansBudget();
+        
     }
 
-    // Calling this method starts the game in a new thread
+    // Calling this method starts the game on a new thread
     public synchronized void startProgram() {
         // do nothing if the game is already running
         if (run) {
             return;
         }
-
-        this.thread = new Thread(this);
-        this.thread.start();
+        
+        run = true;
+        thread = new Thread(this);
+        thread.start();
     }
 
     // stops the game
@@ -55,9 +58,9 @@ public class NoMansBudget implements Runnable {
         if (!run) {
             return;
         }
-
+        run = false;
         try {
-            this.thread.join();
+            thread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -78,13 +81,12 @@ public class NoMansBudget implements Runnable {
         
         // Variable "sleepTime" dictates how long the thread should sleep until update and render is called again
         long sleepTime = 0;
+    
+        // Opens the game window
+        initialize();
 
-        run = false;
-
-        // The game loop. Runs until run becomes false
         while (run) {
-            tickcount++;
-            System.out.println(tickcount);
+            
             update();
             render();
 
@@ -104,31 +106,47 @@ public class NoMansBudget implements Runnable {
             }
             else{
 
-                run = false;
-                // means that the hardware is to slow. Might have to lower the FPS or optimize code.
+                run = false;  // implement instead of stopping program
+                // means that the hardware is to slow. Might have to lower the FPS or optimize code. 
             }
            
 
-
         }
-
-
         stopProgram();
     }
 
     private void initialize() {
-        this.display = new Display("../spaceStars.jpeg");
-
-        // this.display = new Display(Color.CYAN);
+        //display = new Display("../spaceStars.jpeg");
+      
+         display = new Display(Color.CYAN);
     }
 
     // updates the state of the game
     private void update() {
+     
 
     }
 
     // renders the update to the display
     private void render() {
+        
+        windowTick = display.getCanvas().getBufferStrategy(); // buffers each image so the "animation" is smoother
+
+        if(windowTick == null){
+
+             display.getCanvas().createBufferStrategy(3); // numbers of images before window renders it to the user:
+             return;
+        }
+
+        graphic = windowTick.getDrawGraphics();  // Graphic sends images/shapes to the canvas which den is then rendered to the display
+
+        graphic.fillRect(0,0,1280,720);
+        graphic.setColor(Color.RED);
+
+        windowTick.show(); // shows the images
+        graphic.dispose();
+
+
 
     }
 }

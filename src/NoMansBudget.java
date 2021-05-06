@@ -1,7 +1,13 @@
 import java.awt.Color;
 import java.awt.image.BufferStrategy;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.IOException;
+import java.io.File;
 
 /**
  * Class NoMansBudget - Creates a two dimensional solar system containing
@@ -11,142 +17,134 @@ import java.awt.Graphics;
  * 
  * @author Love Lindgren
  * @author Samin Chowdhury
- * @version 2021-05-04
+ * @version 2021-05-06
  */
 public class NoMansBudget implements Runnable {
+    private static final long serialVersionUID = 1L;
+    private static boolean run = false;
+
     private Display display;
     private Thread thread;
+    private Graphics g;
 
-    private boolean run = false;
-    
-    // Sets the buffering for each image that will be displayed 
+    // Sets the buffering for each image that will be displayed
     private BufferStrategy windowTick;
 
     // Sets the FPS (numbers of times render() is called in the game loop)
-    static final int fps = 1;
-    static final int ticks = 1000/fps;
+    static final int maxFPS = 30;
+    static final double ticks = 1000000000 / maxFPS;
 
-    // Creates the images that will be sent to the canvas
-    private Graphics graphic; 
-
-
+    static final String image = "../spaceStars.jpeg";
 
     public NoMansBudget() {
-        this.startProgram();
-    
+        this.start();
     }
 
     public static void main(String[] args) {
         NoMansBudget program = new NoMansBudget();
-        
     }
 
-    // Calling this method starts the game on a new thread
-    public synchronized void startProgram() {
-        // do nothing if the game is already running
+    // Calling this method starts the game in a new thread
+    public synchronized void start() {
         if (run) {
             return;
         }
-        
+
         run = true;
-        thread = new Thread(this);
-        thread.start();
+
+        this.thread = new Thread(this);
+        this.thread.start();
     }
 
     // stops the game
-    public synchronized void stopProgram() {
+    public synchronized void stop() {
         if (!run) {
             return;
         }
+
         run = false;
+
         try {
-            thread.join();
+            this.thread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-   
-
     @Override
     public void run() {
-        int tickcount = 0;
+        long previousTime = System.nanoTime();
         long systemStart = System.currentTimeMillis();
+        double difference = 0;
+        int fps = 0;
 
         // Opens the game window
         initialize();
 
-        // Numbers of milliseconds the game has ran
-        long nextTick = System.currentTimeMillis() - systemStart;   
-        
-        // Variable "sleepTime" dictates how long the thread should sleep until update and render is called again
-        long sleepTime = 0;
-    
-        // Opens the game window
-        initialize();
-
+        // The game loop. Runs until run becomes false
         while (run) {
-            
-            update();
-            render();
+            long currentTime = System.nanoTime();
 
-            nextTick += ticks;
-            sleepTime = nextTick - (System.currentTimeMillis() - systemStart);
+            //
+            difference += (currentTime - previousTime) / ticks;
 
-            if(sleepTime >= 0){
+            previousTime = currentTime;
 
-                // waits for x amounts of time before new iteration of the loops begins  
-                try{
-                    Thread.sleep(sleepTime);
-                }
-                catch(InterruptedException e){
-                    Thread.currentThread().interrupt();  // for some reason this d
-                }
-                
+            // Update every
+            while (difference >= 1) {
+                update();
+                difference--;
+
+                render();
+                fps++;
             }
-            else{
 
-                run = false;  // implement instead of stopping program
-                // means that the hardware is to slow. Might have to lower the FPS or optimize code. 
+            // Every second: Reset
+            if ((System.currentTimeMillis() - systemStart) > 1000) {
+                systemStart += 1000;
+                this.display.setNewTitle("No Man's Budget | FPS: " + fps);
+                fps = 0;
             }
-           
-
         }
-        stopProgram();
+
+        stop();
     }
 
     private void initialize() {
-        //display = new Display("../spaceStars.jpeg");
-      
-         display = new Display();
+        // this.display = new Display("../spaceStars.jpeg");
+        this.display = new Display();
     }
 
-    // updates the state of the game
+    // updates the position/state of the components on the display
     private void update() {
-     
-
+        // TODO: Update circle positions
     }
 
-    // renders the update to the display
+    // Draws components onto the display
     private void render() {
-        
-        windowTick = display.getCanvas().getBufferStrategy(); // buffers each image so the "animation" is smoother
+        BufferStrategy bs = this.display.getBufferStrategy();
 
-        if(windowTick == null){
-
-             display.getCanvas().createBufferStrategy(3); // numbers of images before window renders it to the user:
-             return;
+        if (bs == null) {
+            this.display.createBufferStrategy(3);
+            return;
         }
 
-        graphic = windowTick.getDrawGraphics();  // Graphic sends images/shapes to the canvas which den is then rendered to the display
+        Graphics2D g2 = (Graphics2D) bs.getDrawGraphics();
 
-        graphic.fillRect(0,0,1280,720);
-        graphic.setColor(Color.RED);
+        // Draw components
 
-        windowTick.show(); // shows the images
-        graphic.dispose();
+        try {
+            BufferedImage img = ImageIO.read(new File(image));
+            g2.drawImage(img, 0, 0, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        Circle sun = new Circle(640, 360, 50, g2, Color.YELLOW);
+        Circle planet1 = new Circle(400, 200, 25, g2, Color.GREEN);
+        Circle planet2 = new Circle(600, 300, 30, g2, Color.BLUE);
 
-
+        g2.dispose();
+        bs.show();
     }
 }

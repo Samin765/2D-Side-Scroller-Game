@@ -2,13 +2,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-
-import java.io.File;
-import javax.imageio.ImageIO;
-import java.io.IOException;
 
 /**
  * Class Display - Creates a window with JFrame. The title, position, size,

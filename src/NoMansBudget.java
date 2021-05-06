@@ -3,12 +3,6 @@ import java.awt.image.BufferStrategy;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import java.io.IOException;
-import java.io.File;
-
 /**
  * Class NoMansBudget - Creates a two dimensional solar system containing
  * planets orbiting around a star. The planets are clickable and if a planet is
@@ -132,17 +126,8 @@ public class NoMansBudget implements Runnable {
         Graphics2D g2 = (Graphics2D) bs.getDrawGraphics();
 
         // Draw components
-
-        try {
-            BufferedImage img = ImageIO.read(new File(image));
-            g2.drawImage(img, 0, 0, null);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Circle sun = new Circle(640, 360, 50, g2, Color.YELLOW);
-        Circle planet1 = new Circle(400, 200, 25, g2, Color.GREEN);
-        Circle planet2 = new Circle(600, 300, 30, g2, Color.BLUE);
+        WorldMaps worlds = new WorldMaps();
+        worlds.solarSystem(image, g2);
 
         g2.dispose();
         bs.show();

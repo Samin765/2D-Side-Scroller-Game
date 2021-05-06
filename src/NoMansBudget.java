@@ -45,7 +45,6 @@ public class NoMansBudget implements Runnable {
 
         }
         stop();
-
     }
     // Calling this method starts the game in a new thread
     public synchronized void start(){

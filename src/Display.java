@@ -18,6 +18,7 @@ public class Display extends Canvas {
         // Creates the window's frame and dimension
         this.frame = new JFrame();
         this.size = new Dimension(WIDTH, HEIGHT);
+
         
 
         // Sets the window's title

@@ -32,7 +32,7 @@ public class Display extends Canvas {
      * 
      * @param color the background color
      */
-    public Display(Color color) {
+    public Display() {
         // Creates the window's frame and dimension
         this.frame = new JFrame(title);
 
@@ -40,40 +40,6 @@ public class Display extends Canvas {
         this.size = new Dimension(WIDTH, HEIGHT);
         this.setPreferredSize(size);
 
-        frameConfig(this.frame);
-
-        // Sets the window's background colour
-        this.frame.setBackground(color);
-    }
-
-    /**
-     * Creates a window with an image as a background
-     * 
-     * @param img the background image
-     */
-    public Display(String img) {
-        // Creates the window's frame and dimension
-        this.frame = new JFrame(title);
-
-        // Sets the window's dimension and background
-        try {
-            this.frame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File(img)))));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        frameConfig(this.frame);
-    }
-
-    /**
-     * A helper function for configurating a JFrame's window with basic functions
-     * such as setTitle, setVisible and so on.
-     * 
-     * @param frame the frame to receive the configurations
-     */
-    private void frameConfig(JFrame frame) {
-
-        // Sets the window's size
         this.frame.add(this);
         this.frame.pack();
 
@@ -86,5 +52,9 @@ public class Display extends Canvas {
 
         // Enable visibility
         this.frame.setVisible(true);
+    }
+
+    public void setNewTitle(String title) {
+        this.frame.setTitle(title);
     }
 }

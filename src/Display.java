@@ -32,6 +32,11 @@ public class Display extends Canvas {
         this.frame = new JFrame();
         this.size = new Dimension(WIDTH, HEIGHT);
 
+        // Sets the windows icon image  
+        ImageIcon windowsIcon = new ImageIcon("../windowsIcon.png");
+        frame.setIconImage(windowsIcon.getImage());
+        
+
         // Creates the canvas
         canvas = new Canvas();
         canvas.setPreferredSize(size);

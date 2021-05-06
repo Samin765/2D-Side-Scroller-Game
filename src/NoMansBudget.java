@@ -1,4 +1,7 @@
 import java.awt.Color;
+import java.awt.image.BufferStrategy;
+import java.awt.Graphics;
+
 
 /**
  * Class NoMansBudget - Creates a two dimensional solar system containing
@@ -15,6 +18,18 @@ public class NoMansBudget implements Runnable {
     private Thread thread;
 
     private boolean run = false;
+    
+    // Sets the buffering for each image that will be displayed 
+    private BufferStrategy windowTick;
+
+    // Sets the FPS (numbers of times render() is called in the game loop)
+    static final int fps = 25;
+    static final int ticks = 1000/fps;
+
+    
+    private Graphics graphic;
+
+
 
     public NoMansBudget() {
         this.startProgram();
@@ -48,15 +63,55 @@ public class NoMansBudget implements Runnable {
         }
     }
 
+   
+
     @Override
     public void run() {
+        int tickcount = 0;
+        long systemStart = System.currentTimeMillis();
+
         // Opens the game window
         initialize();
+
+        // Numbers of milliseconds the game has ran
+        long nextTick = System.currentTimeMillis() - systemStart;   
+        
+        // Variable "sleepTime" dictates how long the thread should sleep until update and render is called again
+        long sleepTime = 0;
+
+        run = false;
+
         // The game loop. Runs until run becomes false
         while (run) {
+            tickcount++;
+            System.out.println(tickcount);
             update();
             render();
+
+            nextTick += ticks;
+            sleepTime = nextTick - (System.currentTimeMillis() - systemStart);
+
+            if(sleepTime >= 0){
+
+                // waits for x amounts of time before new iteration of the loops begins  
+                try{
+                    Thread.sleep(sleepTime);
+                }
+                catch(InterruptedException e){
+                    Thread.currentThread().interrupt();  // for some reason this d
+                }
+                
+            }
+            else{
+
+                run = false;
+                // means that the hardware is to slow. Might have to lower the FPS or optimize code.
+            }
+           
+
+
         }
+
 
         stopProgram();
     }

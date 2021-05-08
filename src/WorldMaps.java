@@ -29,6 +29,7 @@ public class WorldMaps {
         }
 
         this.sun = new Circle(640, 360, 50);
+
         this.planet1 = new Circle(400, 200, 25);
         this.planet2 = new Circle(600, 320, 30);
     }

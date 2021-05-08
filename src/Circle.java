@@ -17,8 +17,7 @@ public class Circle {
     private int yPos;
     private int radius;
 
-    private int xSpeed = rand.nextInt() % 5 + 1;
-    private int ySpeed = rand.nextInt() % 5 + 1;
+    private double speed = rand.nextDouble() % 5 + 1;
 
     /**
      * Creates a circle object
@@ -30,12 +29,9 @@ public class Circle {
      * @param color  The circle's color
      */
     public Circle(int x, int y, int radius) {
-        this.xPos = x;
-        this.yPos = y;
+        this.xPos = x - radius;
+        this.yPos = y - radius;
         this.radius = radius;
-
-        this.xPos -= radius;
-        this.yPos -= radius;
     }
 
     /**
@@ -51,9 +47,22 @@ public class Circle {
         g2.fillOval(this.xPos, this.yPos, diameter, diameter);
     }
 
-    public void move() {
-        this.xPos += xSpeed;
-        this.yPos += ySpeed;
+    /**
+     * Moves circle in orbit around another circle
+     * 
+     * @param circle
+     */
+    public void move(int centerX, int centerY) {
+        double xDistance = this.xPos - centerX;
+        double yDistance = -(this.yPos - centerY);
+
+        double orbitRadius = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
+
+        double theta = Math.atan2(yDistance, xDistance);
+        theta += 2 * Math.PI / 360;
+
+        this.xPos = (int) (centerX + orbitRadius * Math.cos(theta));
+        this.yPos = (int) (centerY - orbitRadius * Math.sin(theta));
     }
 
     public int getX() {
@@ -62,12 +71,5 @@ public class Circle {
 
     public int getY() {
         return this.yPos;
-    }
-
-    public static void main(String[] args) {
-        // Circle sun = new Circle(640, 360, 50, g2, Color.YELLOW);
-        // System.out.println(sun.getX());
-        // System.out.println(sun.getY());
-        // System.out.println(sun.getRadius());
     }
 }

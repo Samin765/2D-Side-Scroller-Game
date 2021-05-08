@@ -115,8 +115,8 @@ public class NoMansBudget implements Runnable {
     private void update() {
         // TODO: Update circle positions
 
-        this.worlds.planet1.move();
-        this.worlds.planet2.move();
+        this.worlds.planet1.move(this.worlds.sun.getX(), this.worlds.sun.getY());
+        this.worlds.planet2.move(this.worlds.sun.getX(), this.worlds.sun.getY());
     }
 
     // Draws components onto the display
@@ -132,7 +132,9 @@ public class NoMansBudget implements Runnable {
 
         // Draw components
         worlds.drawBackground(g2, this.worlds.img);
+
         worlds.sun.draw(g2, Color.YELLOW);
+
         worlds.planet1.draw(g2, Color.GREEN);
         worlds.planet2.draw(g2, Color.BLUE);
 

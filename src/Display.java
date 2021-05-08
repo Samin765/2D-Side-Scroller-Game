@@ -10,12 +10,11 @@ import javax.swing.JFrame;
  * 
  * @author Love Lindgren
  * @author Samin Chowdhury
- * @version 2021-05-06
+ * @version 2021-05-08
  */
 public class Display extends Canvas {
     private JFrame frame;
     private Dimension size;
-    private Canvas canvas;
 
     private static String title = "No man's budget";
     static final int WIDTH = 1280;

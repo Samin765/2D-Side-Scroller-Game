@@ -1,6 +1,5 @@
 import java.awt.Color;
 import java.awt.image.BufferStrategy;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 /**
@@ -17,12 +16,10 @@ public class NoMansBudget implements Runnable {
     private static final long serialVersionUID = 1L;
     private static boolean run = false;
 
-    private Display display;
     private Thread thread;
-    private Graphics g;
-
-    // Sets the buffering for each image that will be displayed
-    private BufferStrategy windowTick;
+    private Display display;
+    private WorldMaps worlds;
+    private Graphics2D g2;
 
     // Sets the FPS (numbers of times render() is called in the game loop)
     static final int maxFPS = 30;
@@ -104,14 +101,22 @@ public class NoMansBudget implements Runnable {
         stop();
     }
 
+    /**
+     * Create components to be used
+     */
     private void initialize() {
-        // this.display = new Display("../spaceStars.jpeg");
         this.display = new Display();
+        worlds = new WorldMaps();
+
+        worlds.solarSystem(image, g2);
     }
 
     // updates the position/state of the components on the display
     private void update() {
         // TODO: Update circle positions
+
+        this.worlds.planet1.move();
+        this.worlds.planet2.move();
     }
 
     // Draws components onto the display
@@ -123,11 +128,13 @@ public class NoMansBudget implements Runnable {
             return;
         }
 
-        Graphics2D g2 = (Graphics2D) bs.getDrawGraphics();
+        g2 = (Graphics2D) bs.getDrawGraphics();
 
         // Draw components
-        WorldMaps worlds = new WorldMaps();
-        worlds.solarSystem(image, g2);
+        worlds.drawBackground(g2, this.worlds.img);
+        worlds.sun.draw(g2, Color.YELLOW);
+        worlds.planet1.draw(g2, Color.GREEN);
+        worlds.planet2.draw(g2, Color.BLUE);
 
         g2.dispose();
         bs.show();

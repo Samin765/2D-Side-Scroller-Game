@@ -12,21 +12,25 @@ import java.io.File;
  * game.
  * 
  * @author Love Lindgren
- * @version 2021-05-06
+ * @version 2021-05-08
  */
 public class WorldMaps {
+    BufferedImage img;
+
+    Circle sun;
+    Circle planet1;
+    Circle planet2;
 
     public void solarSystem(String image, Graphics2D g2) {
         try {
-            BufferedImage img = ImageIO.read(new File(image));
-            g2.drawImage(img, 0, 0, null);
+            img = ImageIO.read(new File(image));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        Circle sun = new Circle(640, 360, 50, g2, Color.YELLOW);
-        Circle planet1 = new Circle(400, 200, 25, g2, Color.GREEN);
-        Circle planet2 = new Circle(600, 300, 30, g2, Color.BLUE);
+        this.sun = new Circle(640, 360, 50);
+        this.planet1 = new Circle(400, 200, 25);
+        this.planet2 = new Circle(600, 320, 30);
     }
 
     public void planetMars() {
@@ -34,4 +38,8 @@ public class WorldMaps {
     }
 
     // TODO: Add more planets
+
+    public void drawBackground(Graphics2D g2, BufferedImage image) {
+        g2.drawImage(image, 0, 0, null);
+    }
 }

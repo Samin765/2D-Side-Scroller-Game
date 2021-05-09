@@ -26,7 +26,8 @@ public class NoMansBudget implements Runnable {
     static final int maxFPS = 30;
     static final double ticks = 1000000000 / maxFPS;
 
-    static final String image = "../spaceStars.jpeg";
+    static final String solarSystemBackground = "../spaceStars.jpeg";
+    static final String marsBackground = "../marsBackground.png";
 
     public NoMansBudget() {
         this.start();
@@ -109,15 +110,15 @@ public class NoMansBudget implements Runnable {
         this.display = new Display();
         worlds = new WorldMaps();
 
-        worlds.solarSystem(image, g2);
+        worlds.solarSystem(solarSystemBackground, g2);
     }
 
     // updates the position/state of the components on the display
     private void update() {
         // TODO: Update circle positions
 
-        this.worlds.planet1.move(this.worlds.sun.getX(), this.worlds.sun.getY());
-        this.worlds.planet2.move(this.worlds.sun.getX(), this.worlds.sun.getY());
+        //this.worlds.planet1.move(this.worlds.sun.getX(), this.worlds.sun.getY());
+        //this.worlds.planet2.move(this.worlds.sun.getX(), this.worlds.sun.getY());
     }
 
     // Draws components onto the display
@@ -132,17 +133,18 @@ public class NoMansBudget implements Runnable {
         g2 = (Graphics2D) bs.getDrawGraphics();
 
         // Draw components
-        worlds.drawBackground(g2, this.worlds.img);
+        worlds.drawSolarSystemBackground(g2, this.worlds.img);
 
         worlds.sun.draw(g2, Color.YELLOW);
 
-        worlds.planet1.draw(g2, Color.GREEN);
-        worlds.planet2.draw(g2, Color.BLUE);
+        //worlds.planet1.draw(g2, Color.GREEN);
+        //worlds.planet2.draw(g2, Color.BLUE);
 
-        g2.fillRect(1, 2, 200, 300);
+        worlds.planetMars(g2,marsBackground);
+
 
         g2.dispose();
         bs.show();
     }
-    
+
 }

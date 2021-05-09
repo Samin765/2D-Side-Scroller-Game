@@ -1,13 +1,7 @@
+
 import java.awt.Color;
 import java.awt.image.BufferStrategy;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import java.io.IOException;
-import java.io.File;
 
 /**
  * Class NoMansBudget - Creates a two dimensional solar system containing
@@ -23,12 +17,10 @@ public class NoMansBudget implements Runnable {
     private static final long serialVersionUID = 1L;
     private static boolean run = false;
 
-    private Display display;
     private Thread thread;
-    private Graphics g;
-
-    // Sets the buffering for each image that will be displayed
-    private BufferStrategy windowTick;
+    private Display display;
+    private WorldMaps worlds;
+    private Graphics2D g2;
 
     // Sets the FPS (numbers of times render() is called in the game loop)
     static final int maxFPS = 30;
@@ -110,14 +102,22 @@ public class NoMansBudget implements Runnable {
         stop();
     }
 
+    /**
+     * Create components to be used
+     */
     private void initialize() {
-        // this.display = new Display("../spaceStars.jpeg");
         this.display = new Display();
+        worlds = new WorldMaps();
+
+        worlds.solarSystem(image, g2);
     }
 
     // updates the position/state of the components on the display
     private void update() {
         // TODO: Update circle positions
+
+        this.worlds.planet1.move(this.worlds.sun.getX(), this.worlds.sun.getY());
+        this.worlds.planet2.move(this.worlds.sun.getX(), this.worlds.sun.getY());
     }
 
     // Draws components onto the display
@@ -129,20 +129,17 @@ public class NoMansBudget implements Runnable {
             return;
         }
 
-        Graphics2D g2 = (Graphics2D) bs.getDrawGraphics();
+        g2 = (Graphics2D) bs.getDrawGraphics();
 
         // Draw components
+        worlds.drawBackground(g2, this.worlds.img);
 
-        try {
-            BufferedImage img = ImageIO.read(new File(image));
-            g2.drawImage(img, 0, 0, null);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        worlds.sun.draw(g2, Color.YELLOW);
 
-        Circle sun = new Circle(640, 360, 50, g2, Color.YELLOW);
-        Circle planet1 = new Circle(400, 200, 25, g2, Color.GREEN);
-        Circle planet2 = new Circle(600, 300, 30, g2, Color.BLUE);
+        worlds.planet1.draw(g2, Color.GREEN);
+        worlds.planet2.draw(g2, Color.BLUE);
+
+        g2.fillRect(1, 2, 200, 300);
 
         g2.dispose();
         bs.show();

@@ -2,13 +2,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-
-import java.io.File;
-import javax.imageio.ImageIO;
-import java.io.IOException;
 
 /**
  * Class Display - Creates a window with JFrame. The title, position, size,
@@ -16,12 +10,11 @@ import java.io.IOException;
  * 
  * @author Love Lindgren
  * @author Samin Chowdhury
- * @version 2021-05-06
+ * @version 2021-05-08
  */
 public class Display extends Canvas {
     private JFrame frame;
     private Dimension size;
-    private Canvas canvas;
 
     private static String title = "No man's budget";
     static final int WIDTH = 1280;
@@ -43,8 +36,8 @@ public class Display extends Canvas {
         this.frame.add(this);
         this.frame.pack();
 
-        // Program exist when window is closed
-        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        // Enables shutdown of program
+        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Sets the window's location to center
         this.frame.setLocationRelativeTo(null);

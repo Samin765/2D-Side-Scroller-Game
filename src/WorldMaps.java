@@ -15,12 +15,12 @@ import java.io.File;
  * @version 2021-05-08
  */
 public class WorldMaps {
-    BufferedImage img;
-    
+    public BufferedImage img;
 
-    Circle sun;
-    Circle planet1;
-    Circle planet2;
+
+    public Circle sun;
+    public Circle planet1;
+    public Circle planet2;
 
     public void solarSystem(String image, Graphics2D g2) {
         try {
@@ -41,7 +41,7 @@ public class WorldMaps {
 
     // TODO: Add more planets
 
-    public void drawBackground(Graphics2D g2, BufferedImage image) {
+    public void drawSolarSystemBackground(Graphics2D g2, BufferedImage image) {
         g2.drawImage(image, 0, 0, null);
     }
 }

@@ -16,6 +16,7 @@ import java.io.File;
  */
 public class WorldMaps {
     BufferedImage img;
+    
 
     Circle sun;
     Circle planet1;

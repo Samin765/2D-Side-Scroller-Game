@@ -50,4 +50,5 @@ public class Display extends Canvas {
     public void setNewTitle(String title) {
         this.frame.setTitle(title);
     }
+    
 }

@@ -71,5 +71,7 @@ public class Circle {
 
     public int getY() {
         return this.yPos;
+
     }
+    
 }

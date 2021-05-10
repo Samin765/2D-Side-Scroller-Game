@@ -1,9 +1,6 @@
-
 import java.awt.Color;
 import java.awt.image.BufferStrategy;
 import java.awt.Graphics2D;
-
-
 
 /**
  * Class NoMansBudget - Creates a two dimensional solar system containing
@@ -13,13 +10,11 @@ import java.awt.Graphics2D;
  * 
  * @author Love Lindgren
  * @author Samin Chowdhury
- * @version 2021-05-06
+ * @version 2021-05-10
  */
 public class NoMansBudget implements Runnable {
     private static final long serialVersionUID = 1L;
     private static boolean run = false;
-
-  
 
     private Thread thread;
     private Display display;
@@ -147,10 +142,5 @@ public class NoMansBudget implements Runnable {
 
         g2.dispose();
         bs.show();
-
-
-
-
     }
-
 }

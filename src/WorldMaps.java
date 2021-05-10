@@ -21,13 +21,16 @@ public class WorldMaps {
     public Circle planet1;
     public Circle planet2;
 
-    public void readImage(String image){
+    public Character ric;
+
+    public BufferedImage readImage(String image){
         try {
             img = ImageIO.read(new File(image));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        return img;
     }
 
     public void solarSystem(String image, Graphics2D g2) {
@@ -37,6 +40,7 @@ public class WorldMaps {
 
         this.planet1 = new Circle(400, 200, 25);
         this.planet2 = new Circle(600, 320, 30);
+        this.ric = new Character();
     }
 
     public void planetMars(Graphics2D g2, String image) {
@@ -44,6 +48,9 @@ public class WorldMaps {
         readImage(image);
         
         g2.drawImage(img, 0 , 0, null);
+        //ric.draw(g2);
+
+
 
     }
 
@@ -51,4 +58,10 @@ public class WorldMaps {
     public void drawSolarSystemBackground(Graphics2D g2, BufferedImage image) {
         g2.drawImage(image, 0, 0, null);
     }
+
+    public BufferedImage getImg(){
+        return img;
+    }
+
+    
 }

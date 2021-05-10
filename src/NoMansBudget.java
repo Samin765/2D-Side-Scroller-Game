@@ -3,7 +3,7 @@ import java.awt.Color;
 import java.awt.image.BufferStrategy;
 import java.awt.Graphics2D;
 
-import java.awt.image.BufferedImage;
+
 
 /**
  * Class NoMansBudget - Creates a two dimensional solar system containing
@@ -19,8 +19,7 @@ public class NoMansBudget implements Runnable {
     private static final long serialVersionUID = 1L;
     private static boolean run = false;
 
-    static final int WIDTH = 1280;
-    static final int HEIGHT = 720;
+  
 
     private Thread thread;
     private Display display;
@@ -141,8 +140,6 @@ public class NoMansBudget implements Runnable {
         }
 
         g2 = (Graphics2D) bs.getDrawGraphics();
-        g2.clearRect(0,0,WIDTH,HEIGHT);
-
 
         if(WorldState.getState() != null){
             WorldState.getState().render(g2);

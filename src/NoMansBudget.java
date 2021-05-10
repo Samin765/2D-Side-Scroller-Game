@@ -3,8 +3,6 @@ import java.awt.Color;
 import java.awt.image.BufferStrategy;
 import java.awt.Graphics2D;
 
-import java.awt.image.BufferedImage;
-
 /**
  * Class NoMansBudget - Creates a two dimensional solar system containing
  * planets orbiting around a star. The planets are clickable and if a planet is
@@ -13,14 +11,11 @@ import java.awt.image.BufferedImage;
  * 
  * @author Love Lindgren
  * @author Samin Chowdhury
- * @version 2021-05-06
+ * @version 2021-05-10
  */
 public class NoMansBudget implements Runnable {
     private static final long serialVersionUID = 1L;
     private static boolean run = false;
-
-    static final int WIDTH = 1280;
-    static final int HEIGHT = 720;
 
     private Thread thread;
     private Display display;
@@ -141,8 +136,6 @@ public class NoMansBudget implements Runnable {
         }
 
         g2 = (Graphics2D) bs.getDrawGraphics();
-        g2.clearRect(0,0,WIDTH,HEIGHT);
-
 
         if(WorldState.getState() != null){
             WorldState.getState().render(g2);
@@ -150,10 +143,5 @@ public class NoMansBudget implements Runnable {
 
         g2.dispose();
         bs.show();
-
-
-
-
     }
-
 }

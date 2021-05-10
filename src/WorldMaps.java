@@ -12,7 +12,8 @@ import java.io.File;
  * game.
  * 
  * @author Love Lindgren
- * @version 2021-05-08
+ * @author Samin Chowdhury
+ * @version 2021-05-10
  */
 public class WorldMaps {
     public BufferedImage img;
@@ -27,7 +28,6 @@ public class WorldMaps {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void solarSystem(String image, Graphics2D g2) {
@@ -44,7 +44,6 @@ public class WorldMaps {
         readImage(image);
         
         g2.drawImage(img, 0 , 0, null);
-
     }
 
     // TODO: Add more planets

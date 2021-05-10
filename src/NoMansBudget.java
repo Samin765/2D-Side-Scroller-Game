@@ -1,6 +1,6 @@
+
 import java.awt.Color;
 import java.awt.image.BufferStrategy;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 /**
@@ -11,24 +11,25 @@ import java.awt.Graphics2D;
  * 
  * @author Love Lindgren
  * @author Samin Chowdhury
- * @version 2021-05-06
+ * @version 2021-05-10
  */
 public class NoMansBudget implements Runnable {
     private static final long serialVersionUID = 1L;
     private static boolean run = false;
 
-    private Display display;
     private Thread thread;
-    private Graphics g;
-
-    // Sets the buffering for each image that will be displayed
-    private BufferStrategy windowTick;
+    private Display display;
+    private Graphics2D g2;
 
     // Sets the FPS (numbers of times render() is called in the game loop)
     static final int maxFPS = 30;
     static final double ticks = 1000000000 / maxFPS;
 
-    static final String image = "../spaceStars.jpeg";
+    static final String solarSystemBackground = "../spaceStars.jpeg";
+    static final String marsBackground = "../marsBackground.png";
+
+    // Sets the state of the game.
+    private WorldState gameState;
 
     public NoMansBudget() {
         this.start();
@@ -104,14 +105,25 @@ public class NoMansBudget implements Runnable {
         stop();
     }
 
+    /**
+     * Create components to be used
+     */
     private void initialize() {
-        // this.display = new Display("../spaceStars.jpeg");
         this.display = new Display();
+        Resources.init();
+
+        gameState = new SolarSystem();  
+        WorldState.setState(gameState);   // this sets the state to the game. Starts with the state "SolarSystem" if the user for example clicks on a planet the state can be changed to "Mars" etc
+
     }
 
     // updates the position/state of the components on the display
     private void update() {
         // TODO: Update circle positions
+
+        if(WorldState.getState() != null){
+            WorldState.getState().update();
+        }
     }
 
     // Draws components onto the display
@@ -123,11 +135,11 @@ public class NoMansBudget implements Runnable {
             return;
         }
 
-        Graphics2D g2 = (Graphics2D) bs.getDrawGraphics();
+        g2 = (Graphics2D) bs.getDrawGraphics();
 
-        // Draw components
-        WorldMaps worlds = new WorldMaps();
-        worlds.solarSystem(image, g2);
+        if(WorldState.getState() != null){
+            WorldState.getState().render(g2);
+        }
 
         g2.dispose();
         bs.show();

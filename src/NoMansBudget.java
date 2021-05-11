@@ -14,22 +14,14 @@ import java.awt.Graphics2D;
  * @version 2021-05-10
  */
 public class NoMansBudget implements Runnable {
-    private static final long serialVersionUID = 1L;
-    private static boolean run = false;
-
     private Thread thread;
     private Display display;
+    private Resources resource;
+    private WorldState gameState;
     private Graphics2D g2;
 
-    // Sets the FPS (numbers of times render() is called in the game loop)
-    static final int maxFPS = 30;
-    static final double ticks = 1000000000 / maxFPS;
-
-    static final String solarSystemBackground = "../spaceStars.jpeg";
-    static final String marsBackground = "../marsBackground.png";
-
-    // Sets the state of the game.
-    private WorldState gameState;
+    private static final long serialVersionUID = 1L;
+    private static boolean run = false;
 
     public NoMansBudget() {
         this.start();
@@ -70,8 +62,12 @@ public class NoMansBudget implements Runnable {
     public void run() {
         long previousTime = System.nanoTime();
         long systemStart = System.currentTimeMillis();
+
+        int maxFPS = 30;
+        double ticks = 1000000000 / maxFPS;
+
         double difference = 0;
-        int fps = 0;
+        int fpsCounter = 0;
 
         // Opens the game window
         initialize();
@@ -91,14 +87,14 @@ public class NoMansBudget implements Runnable {
                 difference--;
 
                 render();
-                fps++;
+                fpsCounter++;
             }
 
             // Every second: Reset
             if ((System.currentTimeMillis() - systemStart) > 1000) {
                 systemStart += 1000;
-                this.display.setNewTitle("No Man's Budget | FPS: " + fps);
-                fps = 0;
+                this.display.setNewTitle("No Man's Budget | FPS: " + fpsCounter);
+                fpsCounter = 0;
             }
         }
 
@@ -110,19 +106,18 @@ public class NoMansBudget implements Runnable {
      */
     private void initialize() {
         this.display = new Display();
-        Resources.init();
+        this.resource = new Resources();
+        this.gameState = new SolarSystem();
 
-        gameState = new SolarSystem();  
-        WorldState.setState(gameState);   // this sets the state to the game. Starts with the state "SolarSystem" if the user for example clicks on a planet the state can be changed to "Mars" etc
-
+        // this sets the state to the game. Starts with the state "SolarSystem" if the
+        // user for example clicks on a planet the state can be changed to "Mars" etc
+        this.gameState.setState(gameState);
     }
 
     // updates the position/state of the components on the display
     private void update() {
-        // TODO: Update circle positions
-
-        if(WorldState.getState() != null){
-            WorldState.getState().update();
+        if (this.gameState.getState() != null) {
+            this.gameState.getState().update();
         }
     }
 
@@ -137,8 +132,8 @@ public class NoMansBudget implements Runnable {
 
         g2 = (Graphics2D) bs.getDrawGraphics();
 
-        if(WorldState.getState() != null){
-            WorldState.getState().render(g2);
+        if (this.gameState.getState() != null) {
+            this.gameState.getState().render(g2);
         }
 
         g2.dispose();

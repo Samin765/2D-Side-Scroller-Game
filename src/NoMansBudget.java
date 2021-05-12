@@ -1,3 +1,4 @@
+
 import java.awt.Color;
 import java.awt.image.BufferStrategy;
 import java.awt.Graphics2D;
@@ -10,7 +11,7 @@ import java.awt.Graphics2D;
  * 
  * @author Love Lindgren
  * @author Samin Chowdhury
- * @version 2021-05-06
+ * @version 2021-05-12
  */
 public class NoMansBudget implements Runnable {
     private static final long serialVersionUID = 1L;
@@ -19,7 +20,8 @@ public class NoMansBudget implements Runnable {
 
     private Thread thread;
     private Display display;
-    private WorldMaps worlds;
+    private Resources resource;
+    private WorldState gameState;
     private Graphics2D g2;
 
     public NoMansBudget() {
@@ -105,16 +107,19 @@ public class NoMansBudget implements Runnable {
      */
     private void initialize() {
         this.display = new Display();
-        worlds = new WorldMaps();
+        this.resource = new Resources();
+        this.gameState = new SolarSystem();
 
-        worlds.solarSystem(image, g2);
+        // this sets the state to the game. Starts with the state "SolarSystem" if the
+        // user for example clicks on a planet the state can be changed to "Mars" etc
+        this.gameState.setState(gameState);
     }
 
     // updates the position/state of the components on the display
     private void update() {
-        this.worlds.planet1.move(this.worlds.sun.getX(), this.worlds.sun.getY() + 50, true);
-        this.worlds.planet2.move(this.worlds.sun.getX() + 60, this.worlds.sun.getY(), false);
-        this.worlds.planet3.move(this.worlds.sun.getX() - 10, this.worlds.sun.getY() + 50, true);
+        if (this.gameState.getState() != null) {
+            this.gameState.getState().update();
+        }
     }
 
     // Draws components onto the display
@@ -128,14 +133,9 @@ public class NoMansBudget implements Runnable {
 
         g2 = (Graphics2D) bs.getDrawGraphics();
 
-        // Draw components
-        worlds.drawBackground(g2, this.worlds.img);
-
-        worlds.sun.draw(g2, Color.YELLOW);
-
-        worlds.planet1.draw(g2, Color.GREEN);
-        worlds.planet2.draw(g2, Color.RED);
-        worlds.planet3.draw(g2, Color.BLUE);
+        if (this.gameState.getState() != null) {
+            this.gameState.getState().render(g2);
+        }
 
         g2.dispose();
         bs.show();

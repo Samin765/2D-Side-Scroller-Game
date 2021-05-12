@@ -12,23 +12,23 @@ import java.io.File;
  * game.
  * 
  * @author Love Lindgren
+ * @author Samin Chowdhury
  * @version 2021-05-12
  */
 public class WorldMaps {
-    public BufferedImage img;
+    private BufferedImage img;
+    private ImageLoader loader;
 
     public Circle sun;
     public Circle planet1;
     public Circle planet2;
     public Circle planet3;
+  
+    public WorldMaps() {
+        this.loader = new ImageLoader();
+    }
 
     public void solarSystem(String image, Graphics2D g2) {
-        try {
-            this.img = ImageIO.read(new File(image));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         this.sun = new Circle(640, 360, 50);
 
         this.planet1 = new Circle(640, 60, 25);
@@ -36,11 +36,9 @@ public class WorldMaps {
         this.planet3 = new Circle(550, 320, 30);
     }
 
-    public void planetMars() {
+    public void planetMars(Graphics2D g2, String image) {
         // TODO: Add components etc
     }
-
-    // TODO: Add more planets
 
     public void drawBackground(Graphics2D g2, BufferedImage image) {
         g2.drawImage(image, 0, 0, null);

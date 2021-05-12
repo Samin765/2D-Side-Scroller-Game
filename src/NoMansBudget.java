@@ -15,17 +15,12 @@ import java.awt.Graphics2D;
 public class NoMansBudget implements Runnable {
     private static final long serialVersionUID = 1L;
     private static boolean run = false;
+    static final String image = "../spaceStars.jpeg";
 
     private Thread thread;
     private Display display;
     private WorldMaps worlds;
     private Graphics2D g2;
-
-    // Sets the FPS (numbers of times render() is called in the game loop)
-    static final int maxFPS = 30;
-    static final double ticks = 1000000000 / maxFPS;
-
-    static final String image = "../spaceStars.jpeg";
 
     public NoMansBudget() {
         this.start();
@@ -66,8 +61,12 @@ public class NoMansBudget implements Runnable {
     public void run() {
         long previousTime = System.nanoTime();
         long systemStart = System.currentTimeMillis();
+
+        int maxFPS = 30;
+        double ticks = 1000000000 / maxFPS;
+
         double difference = 0;
-        int fps = 0;
+        int fpsCounter = 0;
 
         // Opens the game window
         initialize();
@@ -87,14 +86,14 @@ public class NoMansBudget implements Runnable {
                 difference--;
 
                 render();
-                fps++;
+                fpsCounter++;
             }
 
             // Every second: Reset
             if ((System.currentTimeMillis() - systemStart) > 1000) {
                 systemStart += 1000;
-                this.display.setNewTitle("No Man's Budget | FPS: " + fps);
-                fps = 0;
+                this.display.setNewTitle("No Man's Budget | FPS: " + fpsCounter);
+                fpsCounter = 0;
             }
         }
 
@@ -113,10 +112,9 @@ public class NoMansBudget implements Runnable {
 
     // updates the position/state of the components on the display
     private void update() {
-        // TODO: Update circle positions
-
-        this.worlds.planet1.move(this.worlds.sun.getX(), this.worlds.sun.getY());
-        this.worlds.planet2.move(this.worlds.sun.getX(), this.worlds.sun.getY());
+        this.worlds.planet1.move(this.worlds.sun.getX(), this.worlds.sun.getY() + 50, true);
+        this.worlds.planet2.move(this.worlds.sun.getX() + 60, this.worlds.sun.getY(), false);
+        this.worlds.planet3.move(this.worlds.sun.getX() - 10, this.worlds.sun.getY() + 50, true);
     }
 
     // Draws components onto the display
@@ -136,7 +134,8 @@ public class NoMansBudget implements Runnable {
         worlds.sun.draw(g2, Color.YELLOW);
 
         worlds.planet1.draw(g2, Color.GREEN);
-        worlds.planet2.draw(g2, Color.BLUE);
+        worlds.planet2.draw(g2, Color.RED);
+        worlds.planet3.draw(g2, Color.BLUE);
 
         g2.dispose();
         bs.show();

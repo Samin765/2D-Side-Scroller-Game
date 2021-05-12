@@ -7,7 +7,7 @@ import java.util.Random;
  * Class Circle - Draws a circle on the JFrame's window
  * 
  * @author Love Lindgren
- * @version 2021-05-08
+ * @version 2021-05-10
  */
 public class Circle {
     private static Graphics2D g2;
@@ -52,14 +52,14 @@ public class Circle {
      * 
      * @param circle
      */
-    public void move(int centerX, int centerY) {
+    public void move(int centerX, int centerY, boolean clockwise) {
         double xDistance = this.xPos - centerX;
         double yDistance = -(this.yPos - centerY);
 
         double orbitRadius = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
 
         double theta = Math.atan2(yDistance, xDistance);
-        theta += 2 * Math.PI / 360;
+        theta += 2 * Math.PI / 360 * (clockwise ? -1 : 1);
 
         this.xPos = (int) (centerX + orbitRadius * Math.cos(theta));
         this.yPos = (int) (centerY - orbitRadius * Math.sin(theta));

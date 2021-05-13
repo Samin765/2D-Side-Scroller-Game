@@ -10,7 +10,7 @@ import javax.swing.JFrame;
  * 
  * @author Love Lindgren
  * @author Samin Chowdhury
- * @version 2021-05-08
+ * @version 2021-05-09
  */
 public class Display extends Canvas {
     private JFrame frame;
@@ -21,9 +21,7 @@ public class Display extends Canvas {
     static final int HEIGHT = 720;
 
     /**
-     * Creates a window with an image as a background
-     * 
-     * @param color the background color
+     * Creates a window with set dimensions and configurations
      */
     public Display() {
         // Creates the window's frame and dimension
@@ -47,6 +45,11 @@ public class Display extends Canvas {
         this.frame.setVisible(true);
     }
 
+    /**
+     * Change title for the window
+     * 
+     * @param title The frame's window
+     */
     public void setNewTitle(String title) {
         this.frame.setTitle(title);
     }

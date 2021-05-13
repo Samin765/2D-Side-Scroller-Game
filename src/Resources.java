@@ -1,5 +1,12 @@
 import java.awt.image.BufferedImage;
 
+/**
+ * Class Resources - Contains all images, files and/or external resources to be
+ * used that can't be solved solely through the usage of coding
+ * 
+ * @author Samin Chowdhury
+ * @version 2021-05-09
+ */
 public class Resources {
     public static ImageLoader loader;
     public static BufferedImage solarSystemBackground, marsBackground;
@@ -7,6 +14,10 @@ public class Resources {
 
     private static final int WIDTH = 1280, HEIGHT = 720;
 
+    /**
+     * Loads a an ImageLoader processes the image and stores it in a buffer, to be
+     * used in WorldImages
+     */
     public Resources() {
         this.loader = new ImageLoader();
 

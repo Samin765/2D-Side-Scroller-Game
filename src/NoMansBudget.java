@@ -11,17 +11,18 @@ import java.awt.Graphics2D;
  * 
  * @author Love Lindgren
  * @author Samin Chowdhury
- * @version 2021-05-10
+ * @version 2021-05-12
  */
 public class NoMansBudget implements Runnable {
+    private static final long serialVersionUID = 1L;
+    private static boolean run = false;
+    static final String image = "../spaceStars.jpeg";
+
     private Thread thread;
     private Display display;
     private Resources resource;
     private WorldState gameState;
     private Graphics2D g2;
-
-    private static final long serialVersionUID = 1L;
-    private static boolean run = false;
 
     public NoMansBudget() {
         this.start();

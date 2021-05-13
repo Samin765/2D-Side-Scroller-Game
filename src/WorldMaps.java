@@ -13,7 +13,7 @@ import java.io.File;
  * 
  * @author Love Lindgren
  * @author Samin Chowdhury
- * @version 2021-05-10
+ * @version 2021-05-12
  */
 public class WorldMaps {
     private BufferedImage img;
@@ -23,7 +23,7 @@ public class WorldMaps {
     public Circle planet1;
     public Circle planet2;
     public Circle planet3;
-
+  
     public WorldMaps() {
         this.loader = new ImageLoader();
     }

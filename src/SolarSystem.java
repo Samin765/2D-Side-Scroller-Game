@@ -25,10 +25,10 @@ public class SolarSystem extends WorldState {
     public void render(Graphics2D g2) {
         this.worlds.drawBackground(g2, Resources.solarSystemBackground);
 
-        this.worlds.sun.draw(g2, Color.YELLOW);
+        this.worlds.sun.draw(g2);
 
-        this.worlds.planet1.draw(g2, Color.GREEN);
-        this.worlds.planet2.draw(g2, Color.RED);
-        this.worlds.planet3.draw(g2, Color.BLUE);
+        this.worlds.planet1.draw(g2);
+        this.worlds.planet2.draw(g2);
+        this.worlds.planet3.draw(g2);
     }
 }

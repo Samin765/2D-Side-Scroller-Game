@@ -1,57 +1,36 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import java.util.Random;
+import javax.swing.JButton;
 
 /**
  * Class Circle - Draws a circle on the JFrame's window
  * 
  * @author Love Lindgren
- * @version 2021-05-10
+ * @version 2021-05-12
  */
-public class Circle {
+public class Circle extends JButton {
     private static Graphics2D g2;
-    private static Random rand = new Random();
 
     private int xPos;
     private int yPos;
     private int radius;
+    private Color color;
 
-    private double speed = rand.nextDouble() % 5 + 1;
-
-    /**
-     * Creates a circle object
-     * 
-     * @param xPos   The position along the x-axis
-     * @param yPos   The position along the y-axis (inverted y-axis)
-     * @param radius The radius of the circle
-     * @param g2     The graphics engine
-     * @param color  The circle's color
-     */
-    public Circle(int x, int y, int radius) {
+    public Circle(int x, int y, int radius, Color color) {
         this.xPos = x - radius;
         this.yPos = y - radius;
         this.radius = radius;
+        this.color = color;
     }
 
-    /**
-     * Fill the body of the circle
-     * 
-     * @param g2
-     * @param color
-     */
-    public void draw(Graphics2D g2, Color color) {
+    public void draw(Graphics2D g2) {
         int diameter = this.radius * 2;
 
         g2.setColor(color);
         g2.fillOval(this.xPos, this.yPos, diameter, diameter);
     }
 
-    /**
-     * Moves circle in orbit around another circle
-     * 
-     * @param circle
-     */
     public void move(int centerX, int centerY, boolean clockwise) {
         double xDistance = this.xPos - centerX;
         double yDistance = -(this.yPos - centerY);

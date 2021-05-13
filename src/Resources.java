@@ -1,15 +1,24 @@
+
 import java.awt.image.BufferedImage;
 
-public class Resources{
+public class Resources {
+    public static ImageLoader loader;
+    public static BufferedImage solarSystemBackground, marsBackground, testCharacter, testCharacter2;
+    public static WorldImages worldImage;
 
-    private static final int width = 1280, height = 720; 
-    public static BufferedImage solarSystemBackground, marsBackground;
+    private static final int WIDTH = 1280, HEIGHT = 720;
 
-    public static void init(){
-        WorldImages worldImage = new WorldImages(ImageLoader.loadImage("../spaceStars.jpeg"));  // fixa en stor bild med alla bilder vi ska ha med samma width och height
+    public Resources() {
+        this.loader = new ImageLoader();
 
-        marsBackground = ImageLoader.loadImage("../marsBackground.png");
-         solarSystemBackground = worldImage.crop(0,0, width, height); // delar upp den stora bilden till små. 
+        // fixa en stor bild med alla bilder vi ska ha med samma width och height
+        this.worldImage = new WorldImages(this.loader.loadImage("../spaceStars.jpeg"));
 
+        this.marsBackground = this.loader.loadImage("../marsBackground.png");
+        // delar upp den stora bilden till små.
+        this.solarSystemBackground = worldImage.crop(0, 0, WIDTH, HEIGHT);
+
+        this.testCharacter = this.loader.loadImage("../characterTest.png");
+        this.testCharacter2 = this.loader.loadImage("../characterTest2.jpg");
     }
 }

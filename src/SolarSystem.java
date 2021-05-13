@@ -1,45 +1,35 @@
-
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-
-public class SolarSystem extends WorldState{
-
+public class SolarSystem extends WorldState {
     private WorldMaps worlds;
     private Graphics2D g2;
 
-     static final String solarSystemBackground = "../spaceStars.jpeg"; // add images to resources class instead 
-    static final String marsBackground = "../marsBackground.png";     
+    // add images to resources class instead
+    private static final String solarSystemBackground = "../spaceStars.jpeg";
 
-   public SolarSystem(NoMansBudget game){
-    super(game);
-    worlds = new WorldMaps();
-    worlds.solarSystem(solarSystemBackground, g2); 
+    public SolarSystem(NoMansBudget game) {
+        super(game);
+        this.worlds = new WorldMaps();
 
-   }
-
-    public void update(){
-        this.worlds.planet1.move(this.worlds.sun.getX(), this.worlds.sun.getY());
-        this.worlds.planet2.move(this.worlds.sun.getX(), this.worlds.sun.getY());
-
+        this.worlds.solarSystem(solarSystemBackground, g2);
     }
 
-    public void render(Graphics2D g2){
-        
-        // Draw components
-        worlds.drawSolarSystemBackground(g2, Resources.solarSystemBackground);  
+    // Update component's position
+    public void update() {
+        this.worlds.planet1.move(this.worlds.sun.getX(), this.worlds.sun.getY() + 50, true);
+        this.worlds.planet2.move(this.worlds.sun.getX() + 60, this.worlds.sun.getY(), false);
+        this.worlds.planet3.move(this.worlds.sun.getX() - 10, this.worlds.sun.getY() + 50, true);
+    }
 
-        worlds.sun.draw(g2, Color.YELLOW);
+    // Draw components
+    public void render(Graphics2D g2) {
+        this.worlds.drawBackground(g2, Resources.solarSystemBackground);
 
-        worlds.planet1.draw(g2, Color.GREEN);
-        worlds.planet2.draw(g2, Color.BLUE);
+        this.worlds.sun.draw(g2);
 
-        //State newGameState = new Mars();  
-        //State.setState(newGameState);  // this will change the state of the game to mars
-
-       
-
-
-
+        this.worlds.planet1.draw(g2);
+        this.worlds.planet2.draw(g2);
+        this.worlds.planet3.draw(g2);
     }
 }

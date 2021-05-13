@@ -16,6 +16,9 @@ public class Display extends Canvas {
     private JFrame frame;
     private Dimension size;
 
+    transient KeyInput keyInput = new KeyInput();
+
+
     private static String title = "No man's budget";
     static final int WIDTH = 1280;
     static final int HEIGHT = 720;
@@ -43,6 +46,10 @@ public class Display extends Canvas {
         this.frame.setLocationRelativeTo(null);
         this.frame.setResizable(false);
 
+        // Adds keyListener to the frame
+        this.frame.setFocusable(true);
+        this.frame.addKeyListener(keyInput);
+
         // Enable visibility
         this.frame.setVisible(true);
     }
@@ -50,5 +57,11 @@ public class Display extends Canvas {
     public void setNewTitle(String title) {
         this.frame.setTitle(title);
     }
+
+    public KeyInput getKeyInput(){ // returns the KeyListener so other classes can access it
+        return keyInput;
+    }
+
+
     
 }

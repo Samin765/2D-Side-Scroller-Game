@@ -12,6 +12,12 @@ public abstract class WorldState{
         return currentState;
     }
 
+    protected NoMansBudget game;
+    
+    public WorldState(NoMansBudget game){
+        this.game = game;
+    }
+
     public abstract void update();
     
     public abstract void render(Graphics2D g2);

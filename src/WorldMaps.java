@@ -2,6 +2,9 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 import javax.swing.JButton;
 
 /**
@@ -10,9 +13,10 @@ import javax.swing.JButton;
  * 
  * @author Love Lindgren
  * @author Samin Chowdhury
- * @version 2021-05-13
+ * @version 2021-05-16
  */
-public class WorldMaps {
+public class WorldMaps implements ActionListener {
+    private Display display;
     private BufferedImage img;
     private ImageLoader loader;
 
@@ -40,6 +44,13 @@ public class WorldMaps {
         this.planet1 = new Circle(640, 60, 25, Color.GREEN);
         this.planet2 = new Circle(450, 360, 15, Color.RED);
         this.planet3 = new Circle(550, 320, 30, Color.BLUE);
+
+        this.sun.addActionListener(this);
+        this.planet1.addActionListener(this);
+        this.planet2.addActionListener(this);
+        this.planet3.addActionListener(this);
+
+        // Need some way to add the buttons to the frame. Currently they don't exist
     }
 
     /**
@@ -59,5 +70,19 @@ public class WorldMaps {
      */
     public void drawBackground(Graphics2D g2, BufferedImage image) {
         g2.drawImage(image, 0, 0, null);
+    }
+
+    /**
+     * Changes location if a specific circle is clicked
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == this.sun) {
+            System.out.println("Poo");
+        } else if (e.getSource() == this.planet1) {
+            System.out.println("Piss");
+        } else {
+            System.out.println("Fart");
+        }
     }
 }

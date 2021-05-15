@@ -13,8 +13,6 @@ import javax.swing.JButton;
 public class Circle extends JButton {
     private static Graphics2D g2;
 
-    private Display display;
-
     private int xPos;
     private int yPos;
     private int diameter;
@@ -36,9 +34,9 @@ public class Circle extends JButton {
         this.color = color;
 
         this.setBounds(this.xPos, this.yPos, this.diameter, this.diameter);
-        this.setOpaque(false);
+        this.setOpaque(true);
         this.setContentAreaFilled(false);
-        this.setBorderPainted(false);
+        this.setBorderPainted(true);
     }
 
     /**

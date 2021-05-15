@@ -1,9 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 import javax.swing.JButton;
 
 /**
@@ -11,11 +8,10 @@ import javax.swing.JButton;
  * JFrame's window
  * 
  * @author Love Lindgren
- * @version 2021-05-13
+ * @version 2021-05-16
  */
-public class Circle extends JButton implements ActionListener {
+public class Circle extends JButton {
     private static Graphics2D g2;
-    private ActionListener action;
 
     private int xPos;
     private int yPos;
@@ -38,9 +34,9 @@ public class Circle extends JButton implements ActionListener {
         this.color = color;
 
         this.setBounds(this.xPos, this.yPos, this.diameter, this.diameter);
-        this.setVisible(true);
-
-        this.addActionListener(this);
+        this.setOpaque(false);
+        this.setContentAreaFilled(false);
+        this.setBorderPainted(true);
     }
 
     /**
@@ -74,7 +70,6 @@ public class Circle extends JButton implements ActionListener {
         this.yPos = (int) (centerY - orbitRadius * Math.sin(theta));
 
         this.setBounds(this.xPos, this.yPos, this.diameter, this.diameter);
-        this.setVisible(true);
     }
 
     /**
@@ -89,13 +84,5 @@ public class Circle extends JButton implements ActionListener {
      */
     public int getY() {
         return this.yPos;
-    }
-
-    /**
-     * Changes location if a specific circle is clicked
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println("Poo");
     }
 }

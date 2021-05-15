@@ -1,4 +1,3 @@
-
 import java.awt.Color;
 import java.awt.image.BufferStrategy;
 import java.awt.Graphics2D;
@@ -11,7 +10,7 @@ import java.awt.Graphics2D;
  * 
  * @author Love Lindgren
  * @author Samin Chowdhury
- * @version 2021-05-12
+ * @version 2021-05-13
  */
 public class NoMansBudget implements Runnable {
     private static final long serialVersionUID = 1L;
@@ -22,7 +21,6 @@ public class NoMansBudget implements Runnable {
     private Display display;
     private Resources resource;
     private WorldState gameState;
-    private Graphics2D g2;
 
     public NoMansBudget() {
         this.start();
@@ -32,7 +30,9 @@ public class NoMansBudget implements Runnable {
         NoMansBudget program = new NoMansBudget();
     }
 
-    // Calling this method starts the game in a new thread
+    /**
+     * Calling this method starts the game in a new thread
+     */
     public synchronized void start() {
         if (run) {
             return;
@@ -44,7 +44,9 @@ public class NoMansBudget implements Runnable {
         this.thread.start();
     }
 
-    // stops the game
+    /**
+     * Closes the threads running and stops the game
+     */
     public synchronized void stop() {
         if (!run) {
             return;
@@ -59,6 +61,9 @@ public class NoMansBudget implements Runnable {
         }
     }
 
+    /**
+     * Starts running the program
+     */
     @Override
     public void run() {
         long previousTime = System.nanoTime();
@@ -115,14 +120,18 @@ public class NoMansBudget implements Runnable {
         this.gameState.setState(gameState);
     }
 
-    // updates the position/state of the components on the display
+    /**
+     * Updates the position/state of the components on the display
+     */
     private void update() {
         if (this.gameState.getState() != null) {
             this.gameState.getState().update();
         }
     }
 
-    // Draws components onto the display
+    /**
+     * Draws the components' updated position/state onto the display
+     */
     private void render() {
         BufferStrategy bs = this.display.getBufferStrategy();
 
@@ -131,7 +140,7 @@ public class NoMansBudget implements Runnable {
             return;
         }
 
-        g2 = (Graphics2D) bs.getDrawGraphics();
+        Graphics2D g2 = (Graphics2D) bs.getDrawGraphics();
 
         if (this.gameState.getState() != null) {
             this.gameState.getState().render(g2);

@@ -10,7 +10,7 @@ import javax.swing.JFrame;
  * 
  * @author Love Lindgren
  * @author Samin Chowdhury
- * @version 2021-05-09
+ * @version 2021-05-08
  */
 public class Display extends Canvas {
     private JFrame frame;
@@ -48,7 +48,7 @@ public class Display extends Canvas {
     /**
      * Change title for the window
      * 
-     * @param title The frame's window
+     * @param title The frame's current title
      */
     public void setNewTitle(String title) {
         this.frame.setTitle(title);

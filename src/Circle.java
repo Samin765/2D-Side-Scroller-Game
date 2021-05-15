@@ -15,6 +15,7 @@ import javax.swing.JButton;
  */
 public class Circle extends JButton implements ActionListener {
     private static Graphics2D g2;
+    private ActionListener action;
 
     private int xPos;
     private int yPos;
@@ -35,6 +36,11 @@ public class Circle extends JButton implements ActionListener {
         this.yPos = y - radius;
         this.diameter = 2 * radius;
         this.color = color;
+
+        this.setBounds(this.xPos, this.yPos, this.diameter, this.diameter);
+        this.setVisible(true);
+
+        this.addActionListener(this);
     }
 
     /**
@@ -66,6 +72,9 @@ public class Circle extends JButton implements ActionListener {
 
         this.xPos = (int) (centerX + orbitRadius * Math.cos(theta));
         this.yPos = (int) (centerY - orbitRadius * Math.sin(theta));
+
+        this.setBounds(this.xPos, this.yPos, this.diameter, this.diameter);
+        this.setVisible(true);
     }
 
     /**

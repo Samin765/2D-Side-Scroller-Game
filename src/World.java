@@ -78,27 +78,27 @@ public class World {
 
     public void render(Graphics2D g2) {
 
-        int xStart = (int) Math.max(0, display.getCamera().getXCamera() / WorldBlocks.blockWidth); // Either the first
+        int xStart = (int) Math.max(0, display.getCamera().getXCamera()); // Either the first
                                                                                                    // block is rendered
                                                                                                    // or the shift on
                                                                                                    // camera divided by
                                                                                                    // the blockwidth
                                                                                                    // blocks are
                                                                                                    // rendered.
-        int yStart = (int) Math.max(0, display.getCamera().getYCamera() / WorldBlocks.blockHeigth);
+        int yStart = (int) Math.max(0, display.getCamera().getYCamera());
         int xEnd = (int) Math.min(width,
-                (display.getCamera().getXCamera() + display.getWidth()) / WorldBlocks.blockWidth + 1); // you add the
+                (display.getCamera().getXCamera() + display.getWidth()) / WorldBlocks.blockWidth + 4); // you add the
                                                                                                        // display width
                                                                                                        // because u want
                                                                                                        // the far right
                                                                                                        // of the screen
         int yEnd = (int) Math.min(heigth,
-                (display.getCamera().getYCamera() + display.getWidth()) / WorldBlocks.blockHeigth + 1);
+                (display.getCamera().getYCamera()) / WorldBlocks.blockHeigth + 1);
 
         for (int y = yStart; y < yEnd; y++) {
             for (int x = xStart; x < xEnd; x++) {
-                getBlock(x, y).render(g2, (int) (x * 100 - display.getCamera().getXCamera()),
-                        (int) (y * 100 - display.getCamera().getYCamera()));
+                getBlock(x, y).render(g2, (int) (x * 90 - display.getCamera().getXCamera()),
+                        (int) (y * 90 - display.getCamera().getYCamera()));
 
             }
         }

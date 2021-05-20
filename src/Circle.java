@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JButton;
 
@@ -8,7 +9,7 @@ import javax.swing.JButton;
  * JFrame's window
  * 
  * @author Love Lindgren
- * @version 2021-05-16
+ * @version 2021-05-20
  */
 public class Circle extends JButton {
     private static Graphics2D g2;
@@ -27,16 +28,12 @@ public class Circle extends JButton {
      * @param g2     The graphics engine
      * @param color  The circle's color
      */
-    public Circle(int x, int y, int radius, Color color) {
+    public Circle(int x, int y, int radius) {
         this.xPos = x - radius;
         this.yPos = y - radius;
         this.diameter = 2 * radius;
-        this.color = color;
 
         this.setBounds(this.xPos, this.yPos, this.diameter, this.diameter);
-        this.setOpaque(false);
-        this.setContentAreaFilled(false);
-        this.setBorderPainted(true);
     }
 
     /**
@@ -45,9 +42,8 @@ public class Circle extends JButton {
      * @param g2    The graphics engine
      * @param color The circle's color
      */
-    public void draw(Graphics2D g2) {
-        g2.setColor(this.color);
-        g2.fillOval(this.xPos, this.yPos, this.diameter, this.diameter);
+    public void draw(Graphics2D g2, BufferedImage image) {
+        g2.drawImage(image, this.xPos, this.yPos, null);
     }
 
     /**

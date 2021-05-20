@@ -5,11 +5,12 @@ import java.awt.image.BufferedImage;
  * used that can't be solved solely through the usage of coding
  * 
  * @author Samin Chowdhury
- * @version 2021-05-09
+ * @author Love Lindgren
+ * @version 2021-05-20
  */
 public class Resources {
     public static ImageLoader loader;
-    public static BufferedImage solarSystemBackground, marsBackground;
+    public static BufferedImage solarSystemBackground, marsBackground, planetBackground;
     public static WorldImages worldImage;
 
     private static final int WIDTH = 1280, HEIGHT = 720;
@@ -23,8 +24,10 @@ public class Resources {
 
         // fixa en stor bild med alla bilder vi ska ha med samma width och height
         this.worldImage = new WorldImages(this.loader.loadImage("../spaceStars.jpeg"));
-
         this.marsBackground = this.loader.loadImage("../marsBackground.png");
+
+        this.planetBackground = this.loader.loadImage("../scorched_planet.png");
+
         // delar upp den stora bilden till små.
         this.solarSystemBackground = worldImage.crop(0, 0, WIDTH, HEIGHT);
     }

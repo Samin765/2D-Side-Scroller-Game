@@ -13,7 +13,7 @@ import javax.swing.JButton;
  * 
  * @author Love Lindgren
  * @author Samin Chowdhury
- * @version 2021-05-16
+ * @version 2021-05-20
  */
 public class WorldMaps implements ActionListener {
     private Display display;
@@ -39,11 +39,11 @@ public class WorldMaps implements ActionListener {
      * @param g2 The graphics engine
      */
     public void solarSystem(Graphics2D g2) {
-        this.sun = new Circle(640, 360, 50, Color.YELLOW);
+        this.sun = new Circle(640, 360, 50);
 
-        this.planet1 = new Circle(640, 60, 25, Color.GREEN);
-        this.planet2 = new Circle(450, 360, 15, Color.RED);
-        this.planet3 = new Circle(550, 320, 30, Color.BLUE);
+        this.planet1 = new Circle(640, 60, 25);
+        this.planet2 = new Circle(450, 360, 15);
+        this.planet3 = new Circle(550, 320, 30);
 
         this.sun.addActionListener(this);
         this.planet1.addActionListener(this);

@@ -1,14 +1,13 @@
 
-public class BackgroundBlock extends WorldBlocks{
+public class BackgroundBlock extends WorldBlocks {
 
-    public BackgroundBlock(int id){
+    public BackgroundBlock(int id) {
         super(Resources.alienBackgroundPlanet, id, 1280, 720);
     }
 
     @Override
-    public boolean isSolid(){
+    public boolean isSolid() {
         return false;
     }
 
 }
-

@@ -16,8 +16,8 @@ public class NoMansBudget implements Runnable {
     private Thread thread;
     private Display display;
     private Resources resource;
-    private WorldState mars;  
-    private WorldState solarSystem; 
+    private WorldState mars;
+    private WorldState solarSystem;
     private WorldState venus;
 
     private static final long serialVersionUID = 1L;
@@ -110,9 +110,10 @@ public class NoMansBudget implements Runnable {
         this.mars = new Mars(this.display);
         this.venus = new Venus(this.display);
         this.solarSystem = new SolarSystem();
-        
-        // this fixed the issue of mouse clicks stopping the keylistener. Adding this to the display class directly does not fix the issue for some reason
-        this.display.setFocusable(false);   
+
+        // this fixed the issue of mouse clicks stopping the keylistener. Adding this to
+        // the display class directly does not fix the issue for some reason
+        this.display.setFocusable(false);
 
         // this sets the state to the game. Starts with the state "SolarSystem" if the
         // user for example clicks on a planet the state can be changed to "Mars" etc
@@ -123,7 +124,6 @@ public class NoMansBudget implements Runnable {
     private void update() {
         // Checks for user input
         this.display.getKey().update();
-       
 
         if (WorldState.getState() != null) {
             WorldState.getState().update();
@@ -140,9 +140,9 @@ public class NoMansBudget implements Runnable {
         }
 
         Graphics2D g2 = (Graphics2D) bs.getDrawGraphics();
-        
+
         // Clears the screen of image residue
-        g2.clearRect(0, 0 ,1280,720); 
+        g2.clearRect(0, 0, 1280, 720);
 
         if (WorldState.getState() != null) {
             WorldState.getState().render(g2);
@@ -152,5 +152,4 @@ public class NoMansBudget implements Runnable {
         bs.show();
     }
 
- 
 }

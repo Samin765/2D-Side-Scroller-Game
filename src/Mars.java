@@ -9,38 +9,38 @@ import java.awt.Graphics2D;
  * @author Samin Chowdhury
  * @version 2021-05-10
  */
-public class Mars extends WorldState{
+public class Mars extends WorldState {
 
-private Player player;
-private World world;
-private Tree tree;
-private Display display;
+    private Player player;
+    private World world;
+    private Tree tree;
+    private Display display;
+
     /**
-     * Loads a new "World" object for Mars
-     * Initalizes the player object
+     * Loads a new "World" object for Mars Initalizes the player object
      */
-   public Mars(Display display){
-       this.display = display;
-       
-       world = new World(display, "../src/Resources/worlds/marsSpawn.txt", 1);
-   }
+    public Mars(Display display) {
+        this.display = display;
 
-    public void update(){
+        world = new World(display, "../src/Resources/worlds/marsSpawn.txt", 1);
+    }
+
+    public void update() {
         world.update();
-        if(World.goVenus){
+        if (World.goVenus) {
             WorldState.setState(new Venus(display));
         }
     }
 
-    public void render(Graphics2D g2){
-         // Draw components
-         g2.drawImage(Resources.woodbg1, 0, -80, 1280,800,null);  // renders the background first then renders the blocks
-         g2.drawImage(Resources.woodbg2, 0, -80, 1280,800,null);  // change the y cordinate if higher blocks are implemented
-         g2.drawImage(Resources.woodbg3, 0, -80, 1280,800,null);
-         g2.drawImage(Resources.woodbg4, 0, -80, 1280,800,null);
+    public void render(Graphics2D g2) {
+        // Draw components
+        g2.drawImage(Resources.woodbg1, 0, -80, 1280, 800, null); // renders the background first then renders the
+                                                                  // blocks
+        g2.drawImage(Resources.woodbg2, 0, -80, 1280, 800, null); // change the y cordinate if higher blocks are
+                                                                  // implemented
+        g2.drawImage(Resources.woodbg3, 0, -80, 1280, 800, null);
+        g2.drawImage(Resources.woodbg4, 0, -80, 1280, 800, null);
         world.render(g2);
 
-
-        
     }
 }

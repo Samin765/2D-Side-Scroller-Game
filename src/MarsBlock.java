@@ -1,16 +1,11 @@
 
-public class MarsBlock extends WorldBlocks{
-    public MarsBlock(int id){
+public class MarsBlock extends WorldBlocks {
+    public MarsBlock(int id) {
         super(Resources.marsBlock, id, 200, 200);
     }
 
-  
-    public boolean isSolid(){
+    public boolean isSolid() {
         return true;
     }
 
-
 }
-
-
-

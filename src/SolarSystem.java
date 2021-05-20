@@ -8,8 +8,7 @@ public class SolarSystem extends WorldState {
     // add images to resources class instead
     private static final String solarSystemBackground = "../spaceStars.jpeg";
 
-    public SolarSystem(NoMansBudget game) {
-        super(game);
+    public SolarSystem() {
         this.worlds = new WorldMaps();
 
         this.worlds.solarSystem(solarSystemBackground, g2);

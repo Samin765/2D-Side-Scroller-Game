@@ -3,13 +3,11 @@ import java.awt.image.BufferedImage;
 
 public class Resources {
     public static ImageLoader loader;
-    public static BufferedImage solarSystemBackground, marsBackground, 
-                                testCharacter, testCharacter2, firePlanet, farPlanet, alienGround, 
-                                alienBackgroundPlanet, alienGrass, tileSet, jumpLeft,
-                                woodbg1, woodbg2, woodbg3, woodbg4, marsDirt, marsGround, marsBridge,
-                                marsWater, marsSkull, marsBlock, transparentBlock, jumpRight,
-                                testGearDrop, venusBg1,venusBg2,venusBg3,venusBg4, purplePotion, orangePotion
-                                ,bluePotion, bluePotionBlock, orangePotionBlock, purplePotionBlock, endScreen;
+    public static BufferedImage solarSystemBackground, marsBackground, testCharacter, testCharacter2, firePlanet,
+            farPlanet, alienGround, alienBackgroundPlanet, alienGrass, tileSet, jumpLeft, woodbg1, woodbg2, woodbg3,
+            woodbg4, marsDirt, marsGround, marsBridge, marsWater, marsSkull, marsBlock, transparentBlock, jumpRight,
+            testGearDrop, venusBg1, venusBg2, venusBg3, venusBg4, purplePotion, orangePotion, bluePotion,
+            bluePotionBlock, orangePotionBlock, purplePotionBlock, endScreen;
     public static WorldImages worldImage;
     public static BufferedImage[] playerLeft;
     public static BufferedImage[] playerRight;
@@ -27,11 +25,11 @@ public class Resources {
         this.playerIdle = new BufferedImage[4];
         this.playerIdleRight = new BufferedImage[3];
         this.playerRight = new BufferedImage[8];
-        this.playerResting =  new BufferedImage[8];
+        this.playerResting = new BufferedImage[8];
         this.playerAttackLeft = new BufferedImage[8];
         this.playerAttackRight = new BufferedImage[7];
 
-        //Frames for player going right animation
+        // Frames for player going right animation
         this.playerLeft[0] = this.loader.loadImage("../src/Resources/LightBandit_Run_0.png");
         this.playerLeft[1] = this.loader.loadImage("../src/Resources/LightBandit_Run_1.png");
         this.playerLeft[2] = this.loader.loadImage("../src/Resources/LightBandit_Run_2.png");
@@ -87,17 +85,13 @@ public class Resources {
 
         this.endScreen = this.loader.loadImage("../src/Resources/EndScreen.jpg");
 
-
-
-
         // fixa en stor bild med alla bilder vi ska ha med samma width och height
         this.worldImage = new WorldImages(this.loader.loadImage("../src/Resources/Mossy - TileSet.png"));
 
         this.marsBackground = this.loader.loadImage("../src/Resources/marsBackground.png");
 
         this.testCharacter = this.loader.loadImage("../src/Resources/LightBandit_idle_0.png");
-        this.testCharacter2 = this.loader.loadImage("../characterTest.png");
-        
+
         this.firePlanet = this.loader.loadImage("../src/Resources/Lava.png");
 
         this.farPlanet = this.loader.loadImage("../src/Resources/parallax-space-far-planets.png");
@@ -119,8 +113,6 @@ public class Resources {
         this.venusBg3 = this.loader.loadImage("../src/Resources/VenusBack3.png");
         this.venusBg4 = this.loader.loadImage("../src/Resources/VenusBack4.png");
 
-
-
         this.marsDirt = this.loader.loadImage("../src/Resources/Wasteland-Files(1).png");
         this.marsBridge = this.loader.loadImage("../src/Resources/Wasteland-Files(2).png");
         this.marsBlock = this.loader.loadImage("../src/Resources/Wasteland-Files(3).png");
@@ -129,7 +121,7 @@ public class Resources {
         this.marsSkull = this.loader.loadImage("../src/Resources/Wasteland-Files(6).png");
         this.testGearDrop = this.loader.loadImage("../src/Resources/testDropGear.png");
 
-        this.transparentBlock =  this.loader.loadImage("../src/Resources/transparentBlock.png");
+        this.transparentBlock = this.loader.loadImage("../src/Resources/transparentBlock.png");
         this.solarSystemBackground = this.loader.loadImage("../src/Resources/spaceStars.jpeg");
 
         this.orangePotion = this.loader.loadImage("../src/Resources/orangePotion.png");
@@ -140,18 +132,8 @@ public class Resources {
         this.purplePotionBlock = this.loader.loadImage("../src/Resources/2.png");
         this.orangePotionBlock = this.loader.loadImage("../src/Resources/2.png");
 
-
-
-
-
-
-
-
-
-
         // delar upp den stora bilden till små.
-                this.tileSet = worldImage.crop(179, 60 , 1184, 1250);
+        this.tileSet = worldImage.crop(179, 60, 1184, 1250);
 
-        
     }
 }

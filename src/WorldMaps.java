@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
@@ -10,16 +9,14 @@ import javax.swing.JButton;
  * 
  * @author Love Lindgren
  * @author Samin Chowdhury
- * @version 2021-05-13
+ * @version 2021-05-20
  */
 public class WorldMaps {
+    private Display display;
     private BufferedImage img;
     private ImageLoader loader;
 
-    public Circle sun;
-    public Circle planet1;
-    public Circle planet2;
-    public Circle planet3;
+    public static Circle sun, planet1, planet2, planet3;
 
     /**
      * Creates an object capable of rendering images
@@ -35,11 +32,11 @@ public class WorldMaps {
      * @param g2 The graphics engine
      */
     public void solarSystem(Graphics2D g2) {
-        this.sun = new Circle(640, 360, 50, Color.YELLOW);
+        this.sun = new Circle(640, 360, 50);
 
-        this.planet1 = new Circle(640, 60, 25, Color.GREEN);
-        this.planet2 = new Circle(450, 360, 15, Color.RED);
-        this.planet3 = new Circle(550, 320, 30, Color.BLUE);
+        this.planet1 = new Circle(640, 60, 15);
+        this.planet2 = new Circle(450, 360, 30);
+        this.planet3 = new Circle(550, 320, 25);
     }
 
     /**

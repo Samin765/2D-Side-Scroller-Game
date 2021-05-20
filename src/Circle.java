@@ -1,8 +1,5 @@
-import java.awt.Color;
 import java.awt.Graphics2D;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JButton;
 
@@ -11,16 +8,14 @@ import javax.swing.JButton;
  * JFrame's window
  * 
  * @author Love Lindgren
- * @version 2021-05-13
+ * @version 2021-05-20
  */
-public class Circle extends JButton implements ActionListener {
+public class Circle extends JButton {
     private static Graphics2D g2;
-    private ActionListener action;
 
     private int xPos;
     private int yPos;
     private int diameter;
-    private Color color;
 
     /**
      * Creates a circle object
@@ -28,30 +23,23 @@ public class Circle extends JButton implements ActionListener {
      * @param xPos   The position along the x-axis
      * @param yPos   The position along the y-axis (inverted y-axis)
      * @param radius The radius of the circle
-     * @param g2     The graphics engine
-     * @param color  The circle's color
      */
-    public Circle(int x, int y, int radius, Color color) {
+    public Circle(int x, int y, int radius) {
         this.xPos = x - radius;
         this.yPos = y - radius;
         this.diameter = 2 * radius;
-        this.color = color;
 
         this.setBounds(this.xPos, this.yPos, this.diameter, this.diameter);
-        this.setVisible(true);
-
-        this.addActionListener(this);
     }
 
     /**
      * Fill the body of the circle
      * 
      * @param g2    The graphics engine
-     * @param color The circle's color
+     * @param image The circle's visuals
      */
-    public void draw(Graphics2D g2) {
-        g2.setColor(this.color);
-        g2.fillOval(this.xPos, this.yPos, this.diameter, this.diameter);
+    public void draw(Graphics2D g2, BufferedImage image) {
+        g2.drawImage(image, this.xPos, this.yPos, this.diameter, this.diameter, null);
     }
 
     /**
@@ -74,7 +62,6 @@ public class Circle extends JButton implements ActionListener {
         this.yPos = (int) (centerY - orbitRadius * Math.sin(theta));
 
         this.setBounds(this.xPos, this.yPos, this.diameter, this.diameter);
-        this.setVisible(true);
     }
 
     /**
@@ -89,13 +76,5 @@ public class Circle extends JButton implements ActionListener {
      */
     public int getY() {
         return this.yPos;
-    }
-
-    /**
-     * Changes location if a specific circle is clicked
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println("Poo");
     }
 }

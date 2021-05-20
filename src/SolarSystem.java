@@ -1,5 +1,6 @@
-import java.awt.Color;
 import java.awt.Graphics2D;
+
+import java.awt.event.ActionEvent;
 
 /**
  * Class SolarSystem - A worldstate (gamestate) for the program which will
@@ -7,7 +8,7 @@ import java.awt.Graphics2D;
  * 
  * @author Love Lindgren
  * @author Samin Chowdhury
- * @version 2021-05-13
+ * @version 2021-05-20
  */
 public class SolarSystem extends WorldState {
     private WorldMaps worlds;
@@ -23,6 +24,7 @@ public class SolarSystem extends WorldState {
         this.worlds = new WorldMaps();
 
         this.worlds.solarSystem(g2);
+        this.worlds.planet2.addActionListener(this);
     }
 
     @Override
@@ -36,10 +38,21 @@ public class SolarSystem extends WorldState {
     public void render(Graphics2D g2) {
         this.worlds.drawBackground(g2, Resources.solarSystemBackground);
 
-        this.worlds.sun.draw(g2);
+        this.worlds.sun.draw(g2, Resources.sunBackground);
 
-        this.worlds.planet1.draw(g2);
-        this.worlds.planet2.draw(g2);
-        this.worlds.planet3.draw(g2);
+        this.worlds.planet1.draw(g2, Resources.planet1Background);
+        this.worlds.planet2.draw(g2, Resources.planet2Background);
+        this.worlds.planet3.draw(g2, Resources.planet3Background);
+    }
+
+    /**
+     * Changes location if a specific circle is clicked
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == this.worlds.planet2) {
+            System.out.println("Traveling to Mars...");
+            SolarSystem.setState(new Mars());
+        }
     }
 }

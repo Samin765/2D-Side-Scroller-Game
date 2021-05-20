@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.image.BufferStrategy;
 import java.awt.Graphics2D;
 
@@ -10,7 +9,7 @@ import java.awt.Graphics2D;
  * 
  * @author Love Lindgren
  * @author Samin Chowdhury
- * @version 2021-05-13
+ * @version 2021-05-20
  */
 public class NoMansBudget implements Runnable {
     private static final long serialVersionUID = 1L;
@@ -118,6 +117,10 @@ public class NoMansBudget implements Runnable {
         // this sets the state to the game. Starts with the state "SolarSystem" if the
         // user for example clicks on a planet the state can be changed to "Mars" etc
         this.gameState.setState(gameState);
+
+        this.display.frame.add(WorldMaps.planet2);
+        this.display.frame.add(this.display);
+        this.display.frame.pack();
     }
 
     /**

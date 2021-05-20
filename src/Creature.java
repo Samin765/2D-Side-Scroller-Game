@@ -24,7 +24,7 @@ public abstract class Creature extends Entity{ // This is the model every creatu
         this.speedY = 2;
         this.speed = 8;
         this.jumpSpeed = 10;
-        this.fallingSpeed = 20;
+        this.fallingSpeed = 7;
 
         this.xMove = 0;
         this.yMove = 0;
@@ -34,22 +34,24 @@ public abstract class Creature extends Entity{ // This is the model every creatu
     }
 
     public void move(){
+        if(!entityCollision(xMove, 0f)){
             xMove();
-        
+        }
+        if(!entityCollision(0f, yMove)){
             yMove();
-        
+        }
      
     }
 
     public void xMove(){
         if(xMove > 0){  // going left check left side of rectangle
-            int tx = (int) (xPos + collision.width) / WorldBlocks.blockWidth;
+            int tx = (int) (xPos + xMove + collision.x + collision.width) / WorldBlocks.blockWidth;
             if(!collisionWithBlock(tx, (int)(yPos + collision.y )/ WorldBlocks.blockHeigth) &&
-                     !collisionWithBlock(tx,(int)(yPos + collision.height)/WorldBlocks.blockHeigth)){
+                     !collisionWithBlock(tx,(int)(yPos + collision.y + collision.height)/WorldBlocks.blockHeigth)){
                 xPos += xMove;
             }
             else{
-                xPos = tx * WorldBlocks.blockWidth - collision.x;
+                xPos = tx * WorldBlocks.blockWidth - collision.x - collision.width - 1;
             }
             
         }
@@ -60,7 +62,7 @@ public abstract class Creature extends Entity{ // This is the model every creatu
                 xPos += xMove;
             }
             else{
-                xPos = tx * WorldBlocks.blockWidth + WorldBlocks.blockWidth;
+                xPos = tx * WorldBlocks.blockWidth + WorldBlocks.blockWidth - collision.x;
             }
         }
         
@@ -68,7 +70,7 @@ public abstract class Creature extends Entity{ // This is the model every creatu
     }
     public void yMove(){
         if(yMove < 0){ // go up checks top part of rectangle
-            int ty = (int) (yPos + yMove + collision.y);
+            int ty = (int) (yPos + yMove + collision.y)/WorldBlocks.blockHeigth;
     
             if(!collisionWithBlock((int)(xPos + collision.x)/WorldBlocks.blockWidth, ty) &&
                         !collisionWithBlock((int)(xPos + collision.x + collision.width)/WorldBlocks.blockWidth, ty)){
@@ -87,7 +89,7 @@ public abstract class Creature extends Entity{ // This is the model every creatu
     
             if(!collisionWithBlock((int)(xPos + collision.x)/WorldBlocks.blockWidth, ty) &&
                         !collisionWithBlock((int)(xPos + collision.x + collision.width)/WorldBlocks.blockWidth, ty)){
-                return;
+                yPos += yMove;
                 
             }
             else{ // collision

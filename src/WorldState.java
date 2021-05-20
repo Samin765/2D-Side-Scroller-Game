@@ -11,12 +11,7 @@ public abstract class WorldState{
     public static WorldState getState(){
         return currentState;
     }
-
-    protected NoMansBudget game;
     
-    public WorldState(NoMansBudget game){
-        this.game = game;
-    }
 
     public abstract void update();
     

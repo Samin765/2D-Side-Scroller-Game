@@ -16,8 +16,10 @@ public class Display extends Canvas {
     private JFrame frame;
     private Dimension size;
 
-    transient KeyInput keyInput = new KeyInput();
-
+    private KeyInput keyInput = new KeyInput(this);
+    private MouseInput  mouseInput = new MouseInput();
+    private WorldCamera worldCamera = new WorldCamera(this,0f,0f); // 0f means that it's a float value 
+    
 
     private static String title = "No man's budget";
     static final int WIDTH = 1280;
@@ -47,8 +49,12 @@ public class Display extends Canvas {
         this.frame.setResizable(false);
 
         // Adds keyListener to the frame
-        this.frame.setFocusable(true);
-        this.frame.addKeyListener(keyInput);
+        this.frame.setFocusTraversalKeysEnabled(false);
+        this.frame.addKeyListener(keyInput);  
+        
+        // Adds mouseListener and mouseMotionListener to the frame
+        this.frame.addMouseListener(mouseInput);
+        this.frame.addMouseMotionListener(mouseInput);
 
         // Enable visibility
         this.frame.setVisible(true);
@@ -58,10 +64,20 @@ public class Display extends Canvas {
         this.frame.setTitle(title);
     }
 
-    public KeyInput getKeyInput(){ // returns the KeyListener so other classes can access it
+    public JFrame getFrame(){
+        return frame;
+    }
+
+    public KeyInput getKey(){
         return keyInput;
     }
 
+    public WorldCamera getCamera(){
+        return worldCamera;
+    }
 
+    public MouseInput getMouse(){
+        return mouseInput;
+    }
     
 }

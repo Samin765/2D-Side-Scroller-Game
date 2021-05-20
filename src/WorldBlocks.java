@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
  * @author Samin chowdhury
  * @version 2021-05-15
  */
+
 public class WorldBlocks{
     public static WorldBlocks[] blocks =  new WorldBlocks[20];   // 20 blocks to build the planets with. Increase if neccessary
     public static WorldBlocks backgroundBlock = new BackgroundBlock(0);  // might be better to use strings to represent the block rather than numbers (use hashmap rather than Array)

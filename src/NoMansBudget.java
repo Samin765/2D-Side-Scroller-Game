@@ -1,6 +1,8 @@
 import java.awt.image.BufferStrategy;
 import java.awt.Graphics2D;
 
+// MERGE BRANCH
+
 /**
  * Class NoMansBudget - Creates a two dimensional solar system containing
  * planets orbiting around a star. The planets are clickable and if a planet is

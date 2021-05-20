@@ -14,15 +14,12 @@ import javax.swing.JButton;
  * @author Samin Chowdhury
  * @version 2021-05-20
  */
-public class WorldMaps implements ActionListener {
+public class WorldMaps {
     private Display display;
     private BufferedImage img;
     private ImageLoader loader;
 
-    public Circle sun;
-    public Circle planet1;
-    public Circle planet2;
-    public Circle planet3;
+    public static Circle sun, planet1, planet2, planet3;
 
     /**
      * Creates an object capable of rendering images
@@ -44,10 +41,9 @@ public class WorldMaps implements ActionListener {
         this.planet2 = new Circle(450, 360, 30);
         this.planet3 = new Circle(550, 320, 25);
 
-        this.sun.addActionListener(this);
-        this.planet1.addActionListener(this);
-        this.planet2.addActionListener(this);
-        this.planet3.addActionListener(this);
+        // this.display.frame.add(this.planet2);
+        // this.display.frame.add(this.display);
+        // this.display.frame.pack();
 
         // Need some way to add the buttons to the frame. Currently they don't exist
     }
@@ -69,19 +65,5 @@ public class WorldMaps implements ActionListener {
      */
     public void drawBackground(Graphics2D g2, BufferedImage image) {
         g2.drawImage(image, 0, 0, null);
-    }
-
-    /**
-     * Changes location if a specific circle is clicked
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.sun) {
-            System.out.println("Poo");
-        } else if (e.getSource() == this.planet1) {
-            System.out.println("Piss");
-        } else {
-            System.out.println("Fart");
-        }
     }
 }

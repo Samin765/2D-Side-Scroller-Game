@@ -10,10 +10,10 @@ import javax.swing.JFrame;
  * 
  * @author Love Lindgren
  * @author Samin Chowdhury
- * @version 2021-05-08
+ * @version 2021-05-20
  */
 public class Display extends Canvas {
-    private JFrame frame;
+    public JFrame frame;
     private Dimension size;
 
     private static String title = "No man's budget";

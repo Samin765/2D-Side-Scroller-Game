@@ -1,5 +1,7 @@
 import java.awt.Graphics2D;
 
+import java.awt.event.ActionEvent;
+
 /**
  * Class SolarSystem - A worldstate (gamestate) for the program which will
  * feature a location depicting a solar system.
@@ -22,6 +24,7 @@ public class SolarSystem extends WorldState {
         this.worlds = new WorldMaps();
 
         this.worlds.solarSystem(g2);
+        this.worlds.planet2.addActionListener(this);
     }
 
     @Override
@@ -40,5 +43,16 @@ public class SolarSystem extends WorldState {
         this.worlds.planet1.draw(g2, Resources.planet1Background);
         this.worlds.planet2.draw(g2, Resources.planet2Background);
         this.worlds.planet3.draw(g2, Resources.planet3Background);
+    }
+
+    /**
+     * Changes location if a specific circle is clicked
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == this.worlds.planet2) {
+            System.out.println("Traveling to Mars...");
+            SolarSystem.setState(new Mars());
+        }
     }
 }

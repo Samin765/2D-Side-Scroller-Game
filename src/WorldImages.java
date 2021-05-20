@@ -26,9 +26,10 @@ public class WorldImages {
      * @param y      The origin position along the y-axis for the image
      * @param width  The width of the image to be used
      * @param height The height of the image to be used
-     * @return A portion of the image
+     * @return       A portion of the image
      */
     public BufferedImage crop(int x, int y, int width, int height) {
+        // returns a portion of the image so you can "move around in the world"
         return this.image.getSubimage(x, y, width, height);
     }
 }

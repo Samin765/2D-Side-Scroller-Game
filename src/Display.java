@@ -16,6 +16,9 @@ public class Display extends Canvas {
     public JFrame frame;
     private Dimension size;
 
+    private KeyInput keyInput = new KeyInput(this);
+    private WorldCamera worldCamera = new WorldCamera(this, 0f, 0f); // 0f means that it's a float value
+
     private static String title = "No man's budget";
     static final int WIDTH = 1280;
     static final int HEIGHT = 720;
@@ -41,6 +44,10 @@ public class Display extends Canvas {
         this.frame.setLocationRelativeTo(null);
         this.frame.setResizable(false);
 
+        // Adds keyListener to the frame
+        this.frame.setFocusTraversalKeysEnabled(false);
+        this.frame.addKeyListener(keyInput);
+
         // Enable visibility
         this.frame.setVisible(true);
     }
@@ -52,5 +59,17 @@ public class Display extends Canvas {
      */
     public void setNewTitle(String title) {
         this.frame.setTitle(title);
+    }
+
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public KeyInput getKey() {
+        return keyInput;
+    }
+
+    public WorldCamera getCamera() {
+        return worldCamera;
     }
 }

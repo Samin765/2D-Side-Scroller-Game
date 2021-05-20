@@ -1,9 +1,6 @@
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 import javax.swing.JButton;
 
 /**
@@ -40,12 +37,6 @@ public class WorldMaps {
         this.planet1 = new Circle(640, 60, 15);
         this.planet2 = new Circle(450, 360, 30);
         this.planet3 = new Circle(550, 320, 25);
-
-        // this.display.frame.add(this.planet2);
-        // this.display.frame.add(this.display);
-        // this.display.frame.pack();
-
-        // Need some way to add the buttons to the frame. Currently they don't exist
     }
 
     /**

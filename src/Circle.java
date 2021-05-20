@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
@@ -17,7 +16,6 @@ public class Circle extends JButton {
     private int xPos;
     private int yPos;
     private int diameter;
-    private Color color;
 
     /**
      * Creates a circle object
@@ -25,8 +23,6 @@ public class Circle extends JButton {
      * @param xPos   The position along the x-axis
      * @param yPos   The position along the y-axis (inverted y-axis)
      * @param radius The radius of the circle
-     * @param g2     The graphics engine
-     * @param color  The circle's color
      */
     public Circle(int x, int y, int radius) {
         this.xPos = x - radius;
@@ -40,10 +36,10 @@ public class Circle extends JButton {
      * Fill the body of the circle
      * 
      * @param g2    The graphics engine
-     * @param color The circle's color
+     * @param image The circle's visuals
      */
     public void draw(Graphics2D g2, BufferedImage image) {
-        g2.drawImage(image, this.xPos, this.yPos, null);
+        g2.drawImage(image, this.xPos, this.yPos, this.diameter, this.diameter, null);
     }
 
     /**

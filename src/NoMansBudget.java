@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.image.BufferStrategy;
 import java.awt.Graphics2D;
 
@@ -10,7 +9,7 @@ import java.awt.Graphics2D;
  * 
  * @author Love Lindgren
  * @author Samin Chowdhury
- * @version 2021-05-13
+ * @version 2021-05-20
  */
 public class NoMansBudget implements Runnable {
     private static final long serialVersionUID = 1L;

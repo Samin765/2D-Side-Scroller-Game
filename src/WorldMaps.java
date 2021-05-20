@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
@@ -41,9 +40,9 @@ public class WorldMaps implements ActionListener {
     public void solarSystem(Graphics2D g2) {
         this.sun = new Circle(640, 360, 50);
 
-        this.planet1 = new Circle(640, 60, 25);
-        this.planet2 = new Circle(450, 360, 15);
-        this.planet3 = new Circle(550, 320, 30);
+        this.planet1 = new Circle(640, 60, 15);
+        this.planet2 = new Circle(450, 360, 30);
+        this.planet3 = new Circle(550, 320, 25);
 
         this.sun.addActionListener(this);
         this.planet1.addActionListener(this);

@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.Graphics2D;
 
 /**
@@ -36,10 +35,10 @@ public class SolarSystem extends WorldState {
     public void render(Graphics2D g2) {
         this.worlds.drawBackground(g2, Resources.solarSystemBackground);
 
-        this.worlds.sun.draw(g2, Resources.planetBackground);
+        this.worlds.sun.draw(g2, Resources.sunBackground);
 
-        this.worlds.planet1.draw(g2, Resources.planetBackground);
-        this.worlds.planet2.draw(g2, Resources.planetBackground);
-        this.worlds.planet3.draw(g2, Resources.planetBackground);
+        this.worlds.planet1.draw(g2, Resources.planet1Background);
+        this.worlds.planet2.draw(g2, Resources.planet2Background);
+        this.worlds.planet3.draw(g2, Resources.planet3Background);
     }
 }

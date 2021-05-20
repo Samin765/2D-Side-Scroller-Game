@@ -10,7 +10,8 @@ import java.awt.image.BufferedImage;
  */
 public class Resources {
     public static ImageLoader loader;
-    public static BufferedImage solarSystemBackground, marsBackground, planetBackground;
+    public static BufferedImage solarSystemBackground, marsBackground, sunBackground, planet1Background,
+            planet2Background, planet3Background;
     public static WorldImages worldImage;
 
     private static final int WIDTH = 1280, HEIGHT = 720;
@@ -26,7 +27,10 @@ public class Resources {
         this.worldImage = new WorldImages(this.loader.loadImage("../spaceStars.jpeg"));
         this.marsBackground = this.loader.loadImage("../marsBackground.png");
 
-        this.planetBackground = this.loader.loadImage("../scorched_planet.png");
+        this.sunBackground = this.loader.loadImage("../sun.png");
+        this.planet1Background = this.loader.loadImage("../desolate_planet.png");
+        this.planet2Background = this.loader.loadImage("../habitable_planet.png");
+        this.planet3Background = this.loader.loadImage("../scorched_planet.png");
 
         // delar upp den stora bilden till små.
         this.solarSystemBackground = worldImage.crop(0, 0, WIDTH, HEIGHT);

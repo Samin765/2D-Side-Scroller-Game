@@ -1,13 +1,15 @@
-
 import java.awt.Color;
 import java.awt.Graphics2D;
+
+import java.awt.event.ActionEvent;
 
 /**
  * Class Mars - A worldstate (gamestate) for the program which will feature a
  * location depicting the planet Mars.
  * 
  * @author Samin Chowdhury
- * @version 2021-05-10
+ * @author Love Lindgren
+ * @version 2021-05-20
  */
 public class Mars extends WorldState {
 
@@ -42,5 +44,7 @@ public class Mars extends WorldState {
         g2.drawImage(Resources.woodbg4, 0, -80, 1280, 800, null);
         world.render(g2);
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
     }
 }

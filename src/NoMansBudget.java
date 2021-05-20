@@ -1,6 +1,7 @@
-import java.awt.Color;
 import java.awt.image.BufferStrategy;
 import java.awt.Graphics2D;
+
+// MERGE BRANCH
 
 /**
  * Class NoMansBudget - Creates a two dimensional solar system containing
@@ -10,14 +11,14 @@ import java.awt.Graphics2D;
  * 
  * @author Love Lindgren
  * @author Samin Chowdhury
- * @version 2021-05-12
+ * @version 2021-05-20
  */
 public class NoMansBudget implements Runnable {
     private Thread thread;
     private Display display;
     private Resources resource;
-    private WorldState mars;
     private WorldState solarSystem;
+    private WorldState mars;
     private WorldState venus;
 
     private static final long serialVersionUID = 1L;
@@ -31,7 +32,9 @@ public class NoMansBudget implements Runnable {
         NoMansBudget program = new NoMansBudget();
     }
 
-    // Calling this method starts the game in a new thread
+    /**
+     * Calling this method starts the game in a new thread
+     */
     public synchronized void start() {
         if (run) {
             return;
@@ -43,7 +46,9 @@ public class NoMansBudget implements Runnable {
         this.thread.start();
     }
 
-    // stops the game
+    /**
+     * Closes the threads running and stops the game
+     */
     public synchronized void stop() {
         if (!run) {
             return;
@@ -58,6 +63,9 @@ public class NoMansBudget implements Runnable {
         }
     }
 
+    /**
+     * Starts running the program
+     */
     @Override
     public void run() {
         long previousTime = System.nanoTime();
@@ -107,9 +115,10 @@ public class NoMansBudget implements Runnable {
     private void initialize() {
         this.display = new Display();
         this.resource = new Resources();
+        this.solarSystem = new SolarSystem();
+
         this.mars = new Mars(this.display);
         this.venus = new Venus(this.display);
-        this.solarSystem = new SolarSystem();
 
         // this fixed the issue of mouse clicks stopping the keylistener. Adding this to
         // the display class directly does not fix the issue for some reason
@@ -117,10 +126,17 @@ public class NoMansBudget implements Runnable {
 
         // this sets the state to the game. Starts with the state "SolarSystem" if the
         // user for example clicks on a planet the state can be changed to "Mars" etc
-        WorldState.setState(venus);
+        WorldState.setState(this.solarSystem);
+        //WorldState.setState(this.venus);
+
+        this.display.frame.add(WorldMaps.planet2);
+        this.display.frame.add(this.display);
+        this.display.frame.pack();
     }
 
-    // updates the position/state of the components on the display
+    /**
+     * Updates the position/state of the components on the display
+     */
     private void update() {
         // Checks for user input
         this.display.getKey().update();
@@ -130,7 +146,9 @@ public class NoMansBudget implements Runnable {
         }
     }
 
-    // Draws components onto the display
+    /**
+     * Draws the components' updated position/state onto the display
+     */
     private void render() {
         BufferStrategy bs = this.display.getBufferStrategy();
 
@@ -151,5 +169,4 @@ public class NoMansBudget implements Runnable {
         g2.dispose();
         bs.show();
     }
-
 }

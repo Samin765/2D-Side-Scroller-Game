@@ -103,11 +103,7 @@ public class Resources {
         this.planet2Background = this.loader.loadImage("../src/Resources/habitable_planet.png");
         this.planet3Background = this.loader.loadImage("../src/Resources/scorched_planet.png");
 
-        this.marsBackground = this.loader.loadImage("../src/Resources/marsBackground.png");
-
         this.testCharacter = this.loader.loadImage("../src/Resources/LightBandit_idle_0.png");
-
-        this.firePlanet = this.loader.loadImage("../src/Resources/Lava.png");
 
         this.farPlanet = this.loader.loadImage("../src/Resources/parallax-space-far-planets.png");
 

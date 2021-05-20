@@ -36,11 +36,11 @@ public class NoMansBudget implements Runnable {
      * Calling this method starts the game in a new thread
      */
     public synchronized void start() {
-        if (run) {
+        if (this.run) {
             return;
         }
 
-        run = true;
+        this.run = true;
 
         this.thread = new Thread(this);
         this.thread.start();
@@ -50,11 +50,11 @@ public class NoMansBudget implements Runnable {
      * Closes the threads running and stops the game
      */
     public synchronized void stop() {
-        if (!run) {
+        if (!this.run) {
             return;
         }
 
-        run = false;
+        this.run = false;
 
         try {
             this.thread.join();
@@ -78,10 +78,10 @@ public class NoMansBudget implements Runnable {
         int fpsCounter = 0;
 
         // Opens the game window
-        initialize();
+        this.initialize();
 
         // The game loop. Runs until run becomes false
-        while (run) {
+        while (this.run) {
             long currentTime = System.nanoTime();
 
             difference += (currentTime - previousTime) / ticks;
@@ -89,10 +89,10 @@ public class NoMansBudget implements Runnable {
 
             // Update every
             while (difference >= 1) {
-                update();
+                this.update();
                 difference--;
 
-                render();
+                this.render();
                 fpsCounter++;
             }
 
@@ -104,7 +104,7 @@ public class NoMansBudget implements Runnable {
             }
         }
 
-        stop();
+        this.stop();
     }
 
     /**
@@ -124,11 +124,11 @@ public class NoMansBudget implements Runnable {
 
         // this sets the state to the game. Starts with the state "SolarSystem" if the
         // user for example clicks on a planet the state can be changed to "Mars" etc
-        WorldState.setState(this.solarSystem);
+        WorldState.setState(this.venus);
 
-        this.display.frame.add(WorldMaps.planet2);
-        this.display.frame.add(this.display);
-        this.display.frame.pack();
+        // this.display.frame.add(WorldMaps.planet2);
+        // this.display.frame.add(this.display);
+        // this.display.frame.pack();
     }
 
     /**

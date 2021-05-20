@@ -24,14 +24,14 @@ public class EntityManager {
         this.world = world;
         this.display = display;
         this.player = player;
-        entities = new ArrayList<Entity>();
+        this.entities = new ArrayList<Entity>();
         addEntity(this.player);
 
     }
 
     public void update() {
         int i = 0;
-        Iterator<Entity> it = entities.iterator();
+        Iterator<Entity> it = this.entities.iterator();
         while (it.hasNext()) {
 
             Entity entity = it.next();
@@ -41,17 +41,17 @@ public class EntityManager {
                 it.remove();
             }
         }
-        entities.sort(renderSorter);
+        this.entities.sort(renderSorter);
     }
 
     public void render(Graphics2D g2) {
-        for (Entity entity : entities) {
+        for (Entity entity : this.entities) {
             entity.render(g2);
         }
     }
 
     public void addEntity(Entity entity) {
-        entities.add(entity);
+        this.entities.add(entity);
     }
 
     public Player getPlayer() {

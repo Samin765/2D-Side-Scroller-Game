@@ -1,4 +1,3 @@
-
 import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 
@@ -36,8 +35,9 @@ public class WorldBlocks {
         this.blockHeigth = blockHeigth;
         this.blockWidth = blockWidth;
 
-        blocks[id] = this; // The object you're creating will be inserted into the specificed array index
-                           // in blocks[]
+        // The object you're creating will be inserted into the specificed array index
+        // in blocks[]
+        this.blocks[this.id] = this;
     }
 
     public void update() {
@@ -45,16 +45,14 @@ public class WorldBlocks {
     }
 
     public void render(Graphics2D g2, int xPos, int yPos) {
-        g2.drawImage(block, xPos, yPos, blockWidth, blockHeigth, null);
-
+        g2.drawImage(this.block, xPos, yPos, this.blockWidth, this.blockHeigth, null);
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public boolean isSolid() {
-        return false;
+        return true;
     }
-
 }

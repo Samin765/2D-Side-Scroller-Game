@@ -11,11 +11,9 @@ import java.awt.event.ActionEvent;
  * @version 2021-05-20
  */
 public class SolarSystem extends WorldState {
+    Display display;
     private WorldMaps worlds;
     private Graphics2D g2;
-
-    // add images to resources class instead
-    private static final String solarSystemBackground = "../spaceStars.jpeg";
 
     /**
      * Loads the components from the worldmap, containing circle objects
@@ -52,7 +50,8 @@ public class SolarSystem extends WorldState {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.worlds.planet2) {
             System.out.println("Traveling to Mars...");
-            SolarSystem.setState(new Mars());
+            this.worlds.planet2.setVisible(false);
+            SolarSystem.setState(new Mars(this.display));
         }
     }
 }

@@ -17,25 +17,22 @@ public class KeyInput implements KeyListener {
     private static long keyReleased;
 
     public KeyInput(Display display) {
-        keys = new boolean[300];
+        this.keys = new boolean[300];
         this.display = display;
-
     }
 
     @Override
     public void keyPressed(KeyEvent event) {
-
         if (event.getKeyCode() == KeyEvent.VK_W || event.getKeyCode() == KeyEvent.VK_SPACE) {
             final long currentTime = System.currentTimeMillis();
 
-            if ((currentTime - keyReleased) <= keyReleasedTimeLock) {
+            if ((currentTime - this.keyReleased) <= this.keyReleasedTimeLock) {
                 return;
             }
-            keyReleased = System.currentTimeMillis();
-
+            this.keyReleased = System.currentTimeMillis();
         }
 
-        keys[event.getKeyCode()] = true;
+        this.keys[event.getKeyCode()] = true;
     }
 
     @Override
@@ -45,23 +42,21 @@ public class KeyInput implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent event) {
-
-        keys[event.getKeyCode()] = false;
-
+        this.keys[event.getKeyCode()] = false;
     }
 
+    // Player goes "up" if Up arrow or W is pressed, down if S, left if A, right if
+    // D and exit if escape.
     public void update() {
-        jump = keys[KeyEvent.VK_W] || keys[KeyEvent.VK_SPACE]; // Player goes "up" if Up arrow or W is pressed
-        down = keys[KeyEvent.VK_S];
-        right = keys[KeyEvent.VK_D];
-        left = keys[KeyEvent.VK_A];
-        esc = keys[KeyEvent.VK_ESCAPE];
+        this.jump = this.keys[KeyEvent.VK_W] || this.keys[KeyEvent.VK_SPACE];
+        this.down = this.keys[KeyEvent.VK_S];
+        this.right = this.keys[KeyEvent.VK_D];
+        this.left = this.keys[KeyEvent.VK_A];
+        this.esc = this.keys[KeyEvent.VK_ESCAPE];
 
-        aUp = keys[KeyEvent.VK_UP];
-        aDown = keys[KeyEvent.VK_DOWN];
-        aLeft = keys[KeyEvent.VK_LEFT];
-        aRight = keys[KeyEvent.VK_RIGHT];
-
+        this.aUp = this.keys[KeyEvent.VK_UP];
+        this.aDown = this.keys[KeyEvent.VK_DOWN];
+        this.aLeft = this.keys[KeyEvent.VK_LEFT];
+        this.aRight = this.keys[KeyEvent.VK_RIGHT];
     }
-
 }

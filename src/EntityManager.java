@@ -1,4 +1,3 @@
-
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -6,12 +5,11 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 public class EntityManager {
-
     private World world;
     private Display display;
     private Player player;
 
-    private ArrayList<Entity> entites;
+    private ArrayList<Entity> entities;
     private Comparator<Entity> renderSorter = new Comparator<Entity>() {
 
         public int compare(Entity a, Entity b) {
@@ -26,14 +24,14 @@ public class EntityManager {
         this.world = world;
         this.display = display;
         this.player = player;
-        entites = new ArrayList<Entity>();
-        addEntity(player);
+        entities = new ArrayList<Entity>();
+        addEntity(this.player);
 
     }
 
     public void update() {
         int i = 0;
-        Iterator<Entity> it = entites.iterator();
+        Iterator<Entity> it = entities.iterator();
         while (it.hasNext()) {
 
             Entity entity = it.next();
@@ -43,33 +41,32 @@ public class EntityManager {
                 it.remove();
             }
         }
-        entites.sort(renderSorter);
+        entities.sort(renderSorter);
     }
 
     public void render(Graphics2D g2) {
-        for (Entity entity : entites) {
+        for (Entity entity : entities) {
             entity.render(g2);
         }
     }
 
     public void addEntity(Entity entity) {
-        entites.add(entity);
+        entities.add(entity);
     }
 
     public Player getPlayer() {
-        return player;
+        return this.player;
     }
 
     public World getWorld() {
-        return world;
+        return this.world;
     }
 
     public Display getDisplay() {
-        return display;
+        return this.display;
     }
 
     public ArrayList<Entity> getEntities() {
-        return entites;
+        return this.entities;
     }
-
 }

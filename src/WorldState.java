@@ -27,8 +27,8 @@ public abstract class WorldState implements ActionListener {
     /**
      * @return The current game location
      */
-    public WorldState getState() {
-        return this.currentState;
+    public static WorldState getState() {
+        return currentState;
     }
 
     /**
@@ -43,6 +43,9 @@ public abstract class WorldState implements ActionListener {
      */
     public abstract void render(Graphics2D g2);
 
+    /**
+     * Changes the location on certain clicks
+     */
     @Override
     public abstract void actionPerformed(ActionEvent e);
 }

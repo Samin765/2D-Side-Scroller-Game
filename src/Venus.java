@@ -1,5 +1,6 @@
-import java.awt.Color;
 import java.awt.Graphics2D;
+
+import java.awt.event.ActionEvent;
 
 public class Venus extends WorldState {
     private Player player;
@@ -32,6 +33,9 @@ public class Venus extends WorldState {
         g2.drawImage(Resources.woodbg4, 0, -80, 1280, 800, null); // renders the background first then renders the
                                                                   // blocks
         world.render(g2);
+    }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
     }
 }

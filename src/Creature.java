@@ -1,6 +1,6 @@
 
-public abstract class Creature extends Entity { // This is the model every creature have to be created from. Creatures
-                                                // are players, enemies etc.
+// This is the model every creature have to be created from. Creatures are players, enemies etc.
+public abstract class Creature extends Entity {
     protected float speedX;
     protected float speedY;
     protected float xMove;
@@ -15,7 +15,8 @@ public abstract class Creature extends Entity { // This is the model every creat
     private static final float MAX_SPEED = 5f;
 
     protected Creature(World world, Display display, float xPos, float yPos, int width, int heigth) { // Starting point
-                                                                                                      // of the creature
+                                                                                                      // // of the
+                                                                                                      // creature
         super(world, display, xPos, yPos, width, heigth);
         this.speedX = 8;
         this.speedY = 2;
@@ -25,82 +26,75 @@ public abstract class Creature extends Entity { // This is the model every creat
 
         this.xMove = 0;
         this.yMove = 0;
-
     }
 
     public void move() {
-        if (!entityCollision(xMove, 0f)) {
+        if (!entityCollision(this.xMove, 0f)) {
             xMove();
         }
-        if (!entityCollision(0f, yMove)) {
+        if (!entityCollision(0f, this.yMove)) {
             yMove();
         }
-
     }
 
     public void xMove() {
-        if (xMove > 0) { // going left check left side of rectangle
-            int tx = (int) (xPos + xMove + collision.x + collision.width) / WorldBlocks.blockWidth;
-            if (!collisionWithBlock(tx, (int) (yPos + collision.y) / WorldBlocks.blockHeigth) && !collisionWithBlock(tx,
-                    (int) (yPos + collision.y + collision.height) / WorldBlocks.blockHeigth)) {
-                xPos += xMove;
-            } else {
-                xPos = tx * WorldBlocks.blockWidth - collision.x - collision.width - 1;
+        if (this.xMove > 0) { // going left check left side of rectangle
+            int tx = (int) (this.xPos + this.xMove + this.collision.x + this.collision.width) / WorldBlocks.blockWidth;
+            if (!collisionWithBlock(tx, (int) (this.yPos + this.collision.y) / WorldBlocks.blockHeigth)
+                    && !collisionWithBlock(tx,
+                            (int) (this.yPos + this.collision.y + this.collision.height) / WorldBlocks.blockHeigth)) {
+                this.xPos += this.xMove;
+            } else { // collission
+                this.xPos = tx * WorldBlocks.blockWidth - this.collision.x - this.collision.width - 1;
             }
-
-        } else if (xMove < 0) { // going right
-            int tx = (int) (xPos + xMove + collision.x) / WorldBlocks.blockWidth;
-            if (!collisionWithBlock(tx, (int) (yPos + collision.y) / WorldBlocks.blockHeigth) && !collisionWithBlock(tx,
-                    (int) (yPos + collision.y + collision.height) / WorldBlocks.blockHeigth)) {
-                xPos += xMove;
-            } else {
-                xPos = tx * WorldBlocks.blockWidth + WorldBlocks.blockWidth - collision.x;
+        } else if (this.xMove < 0) { // going right
+            int tx = (int) (this.xPos + this.xMove + this.collision.x) / WorldBlocks.blockWidth;
+            if (!collisionWithBlock(tx, (int) (this.yPos + this.collision.y) / WorldBlocks.blockHeigth)
+                    && !collisionWithBlock(tx,
+                            (int) (this.yPos + this.collision.y + this.collision.height) / WorldBlocks.blockHeigth)) {
+                this.xPos += this.xMove;
+            } else { // collission
+                this.xPos = tx * WorldBlocks.blockWidth + WorldBlocks.blockWidth - this.collision.x;
             }
         }
-
     }
 
     public void yMove() {
-        if (yMove < 0) { // go up checks top part of rectangle
-            int ty = (int) (yPos + yMove + collision.y) / WorldBlocks.blockHeigth;
+        // Move upwards checks top part of rectangle
+        if (this.yMove < 0) {
+            int ty = (int) (this.yPos + this.yMove + this.collision.y) / WorldBlocks.blockHeigth;
 
-            if (!collisionWithBlock((int) (xPos + collision.x) / WorldBlocks.blockWidth, ty)
-                    && !collisionWithBlock((int) (xPos + collision.x + collision.width) / WorldBlocks.blockWidth, ty)) {
-
-                yPos += yMove;
-
+            if (!collisionWithBlock((int) (this.xPos + this.collision.x) / WorldBlocks.blockWidth, ty)
+                    && !collisionWithBlock(
+                            (int) (this.xPos + this.collision.x + this.collision.width) / WorldBlocks.blockWidth, ty)) {
+                this.yPos += this.yMove;
             } else { // collision
-                yPos = ty * WorldBlocks.blockHeigth + WorldBlocks.blockHeigth - collision.y;
-
+                this.yPos = ty * WorldBlocks.blockHeigth + WorldBlocks.blockHeigth - this.collision.y;
             }
 
-        } else if (yMove > 0) { // go down checks bottom part of rectangle
-            int ty = (int) (yPos + yMove + collision.y + collision.height) / WorldBlocks.blockHeigth;
-
-            if (!collisionWithBlock((int) (xPos + collision.x) / WorldBlocks.blockWidth, ty)
-                    && !collisionWithBlock((int) (xPos + collision.x + collision.width) / WorldBlocks.blockWidth, ty)) {
-                yPos += yMove;
-
+        } else if (this.yMove > 0) { // go down checks bottom part of rectangle
+            int ty = (int) (this.yPos + this.yMove + this.collision.y + this.collision.height)
+                    / WorldBlocks.blockHeigth;
+            if (!collisionWithBlock((int) (this.xPos + this.collision.x) / WorldBlocks.blockWidth, ty)
+                    && !collisionWithBlock(
+                            (int) (this.xPos + this.collision.x + this.collision.width) / WorldBlocks.blockWidth, ty)) {
+                this.yPos += this.yMove;
             } else { // collision
-                yPos = ty * WorldBlocks.blockHeigth - collision.y - collision.height - 1;
-
+                this.yPos = ty * WorldBlocks.blockHeigth - this.collision.y - this.collision.height - 1;
             }
-
         }
-
     }
 
     protected boolean collisionWithBlock(int x, int y) {
-        return world.getBlock(x, y).isSolid();
-
+        return this.world.getBlock(x, y).isSolid();
     }
 
     public float getXMove() {
-        return xMove;
+        return this.xMove;
     }
 
     public float getYMove() {
-        return yMove;
+        return this.yMove;
     }
 
     public void setXMove(float xMove) {
@@ -114,5 +108,4 @@ public abstract class Creature extends Entity { // This is the model every creat
     public void setSpeed(float speed) {
         this.speedX = speedX;
     }
-
 }

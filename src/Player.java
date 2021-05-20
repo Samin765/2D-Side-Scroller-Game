@@ -10,7 +10,6 @@ import java.awt.Rectangle;
  * @version 2021-05-15
  */
 public class Player extends Creature {
-
     private Animation animationLeft;
     private Animation animationIdle;
     private Animation animationIdleRight;
@@ -38,10 +37,10 @@ public class Player extends Creature {
     public Player(World world, Display display, float xPos, float yPos) {
         super(world, display, xPos, yPos, Creature.DEFAULT_WIDTH, Creature.DEFAULT_HEIGTH);
 
-        collision.x = 36;
-        collision.y = 32;
-        collision.height = 80;
-        collision.width = 32;
+        this.collision.x = 36;
+        this.collision.y = 32;
+        this.collision.height = 80;
+        this.collision.width = 32;
 
         this.jumpSpeed = 10;
         this.fallingSpeed = 7;
@@ -55,55 +54,57 @@ public class Player extends Creature {
         this.animationIdleRight = new Animation(0, Resources.playerIdleRight);
     }
 
+    @Override
     public void update() {
-        animationLeft.update();
-        animationIdle.update();
-        animationIdleRight.update();
-        animationRight.update();
-        animationResting.update();
-        animationAttackLeft.update();
-        animationAttackRight.update();
+        this.animationLeft.update();
+        this.animationIdle.update();
+        this.animationIdleRight.update();
+        this.animationRight.update();
+        this.animationResting.update();
+        this.animationAttackLeft.update();
+        this.animationAttackRight.update();
 
-        getPlayerInput();
-        move(); // Calls Creatures move() method
-        display.getCamera().followPlayer(this); // follow this player
+        this.getPlayerInput();
+        this.move(); // Calls Creatures move() method
+        this.display.getCamera().followPlayer(this); // follow this player
 
-        checkAttacks();
-
+        this.checkAttacks();
     }
 
     private void checkAttacks() {
-        attackLock += System.currentTimeMillis() - lastAttack;
-        lastAttack = System.currentTimeMillis();
+        this.attackLock += System.currentTimeMillis() - this.lastAttack;
+        this.lastAttack = System.currentTimeMillis();
 
-        if (attackLock < attackCoolDown) {
+        if (this.attackLock < this.attackCoolDown) {
             return;
         }
+
         Rectangle player = getCollisionBounds(0f, 0f);
         Rectangle attack = new Rectangle();
         int attackSize = 20;
+
         attack.width = attackSize;
         attack.height = attackSize;
 
-        if (display.getKey().aUp) {
+        if (this.display.getKey().aUp) {
             attack.x = player.x + player.width / 2 + attackSize / 2;
             attack.y = player.y - attackSize;
-        } else if (display.getKey().aDown) {
+        } else if (this.display.getKey().aDown) {
             attack.x = player.x + player.width / 2 + attackSize / 2;
             attack.y = player.y - player.height;
-        } else if (display.getKey().aLeft) {
+        } else if (this.display.getKey().aLeft) {
             attack.x = player.x - attackSize;
             attack.y = player.y + player.height / 2 - attackSize / 2;
-        } else if (display.getKey().aRight) {
+        } else if (this.display.getKey().aRight) {
             attack.x = player.x + player.width;
             attack.y = player.y + player.height / 2 - attackSize / 2;
         } else {
             return;
         }
 
-        attackLock = 0;
+        this.attackLock = 0;
 
-        for (Entity e : world.getEntityManager().getEntities()) {
+        for (Entity e : this.world.getEntityManager().getEntities()) {
             if (e.equals(this)) { // dont attack yourself
                 continue;
             }
@@ -117,76 +118,73 @@ public class Player extends Creature {
     }
 
     private void getPlayerInput() {
-        xMove = 0;
-        yMove = 0;
+        this.xMove = 0;
+        this.yMove = 0;
 
         if (this.display.getKey().jump) {
-            float oldYPos = yPos;
+            float oldYPos = this.yPos;
 
-            if (!jumping) {
+            if (!this.jumping) {
                 final long currentTime = System.currentTimeMillis();
-                if ((currentTime - keyReleased) <= keyReleasedTimeLock) {
-                    yPos = oldYPos;
+                if ((currentTime - this.keyReleased) <= this.keyReleasedTimeLock) {
+                    this.yPos = oldYPos;
                     return;
                 }
 
-                jump();
-                keyReleased = System.currentTimeMillis();
+                this.jump();
+                this.keyReleased = System.currentTimeMillis();
             }
-
         }
 
         if (this.display.getKey().down) {
-            yMove = speedY;
+            this.yMove = this.speedY;
         }
         if (this.display.getKey().right) {
-            xMove = speedX;
+            this.xMove = this.speedX;
         }
         if (this.display.getKey().left) {
-            xMove -= speedX;
+            this.xMove -= this.speedX;
         }
         if (this.display.getKey().esc) {
             System.exit(1);
         }
-        if (jumping) {
-            int ty2 = (int) (yPos - jumpSpeed + collision.y) / WorldBlocks.blockHeigth;
+        if (this.jumping) {
+            int ty2 = (int) (this.yPos - this.jumpSpeed + this.collision.y) / WorldBlocks.blockHeigth;
 
-            if (!collisionWithBlock((int) (xPos + collision.x) / WorldBlocks.blockWidth, ty2)
-                    && !collisionWithBlock((int) (xPos + collision.x + collision.width) / WorldBlocks.blockWidth,
+            if (!collisionWithBlock((int) (this.xPos + this.collision.x) / WorldBlocks.blockWidth, ty2)
+                    && !collisionWithBlock(
+                            (int) (this.xPos + this.collision.x + this.collision.width) / WorldBlocks.blockWidth,
                             ty2)) {
 
-                yPos = yPos - jumpSpeed;
+                this.yPos = this.yPos - this.jumpSpeed;
             } else { // collision
-                jumping = false;
+                this.jumping = false;
             }
 
         }
-        if (!jumping) {
-            gravity += 0.008f;
-            int ty = (int) (yPos + (fallingSpeed + gravity) + collision.y + collision.height) / WorldBlocks.blockHeigth;
-
-            if (!collisionWithBlock((int) (xPos + collision.x) / WorldBlocks.blockWidth, ty)
-                    && !collisionWithBlock((int) (xPos + collision.x + collision.width) / WorldBlocks.blockWidth, ty)) {
-                yPos += fallingSpeed + gravity;
-
+        if (!this.jumping) {
+            this.gravity += 0.008f;
+            int ty = (int) (this.yPos + (this.fallingSpeed + this.gravity) + this.collision.y + this.collision.height)
+                    / WorldBlocks.blockHeigth;
+            if (!collisionWithBlock((int) (this.xPos + this.collision.x) / WorldBlocks.blockWidth, ty)
+                    && !collisionWithBlock(
+                            (int) (this.xPos + this.collision.x + this.collision.width) / WorldBlocks.blockWidth, ty)) {
+                this.yPos += this.fallingSpeed + this.gravity;
             } else { // collision
-                yPos = ty * WorldBlocks.blockHeigth - collision.y - collision.height - 1;
-                gravity = 0.009f;
-
+                this.yPos = ty * WorldBlocks.blockHeigth - collision.y - collision.height - 1;
+                this.gravity = 0.009f;
             }
-
         }
-
     }
 
     public void jump() {
-        jumping = true;
+        this.jumping = true;
         new Thread(new thread()).start();
-
     }
 
-    public class thread implements Runnable { // this might not be the smartest thing to do but it works ..or it is the
-                                              // smartest thing to do
+    // this might not be the smartest thing to do but it works ..or it is the
+    // smartest thing to do
+    public class thread implements Runnable {
 
         @Override
         public void run() {
@@ -199,59 +197,56 @@ public class Player extends Creature {
                 System.exit(0);
             }
         }
-
     }
 
+    @Override
     public void render(Graphics2D g2) {
-
-        g2.drawImage(getCurrentFrame(), (int) (xPos - display.getCamera().getXCamera()),
-                (int) (yPos - display.getCamera().getYCamera()), width, heigth, null);
+        g2.drawImage(getCurrentFrame(), (int) (this.xPos - this.display.getCamera().getXCamera()),
+                (int) (this.yPos - this.display.getCamera().getYCamera()), this.width, this.heigth, null);
 
         // g2.setColor(Color.RED);
         // g2.fillRect((int) (xPos +collision.x -
         // display.getCamera().getXCamera()),(int) (yPos +collision.y -
         // display.getCamera().getYCamera()) ,collision.width, collision.height);
-
     }
 
     private BufferedImage getCurrentFrame() {
 
-        if (xMove < 0) {
-            idle = 0;
+        if (this.xMove < 0) {
+            this.idle = 0;
             return animationLeft.getFrame();
         }
-        if (xMove > 0) {
-            idle = 1;
-            return animationRight.getFrame();
+        if (this.xMove > 0) {
+            this.idle = 1;
+            return this.animationRight.getFrame();
         }
-        if (jumping) {
-            if (idle == 0) {
+        if (this.jumping) {
+            if (this.idle == 0) {
                 return Resources.jumpLeft;
             } else
                 return Resources.jumpRight;
         }
-        if (yMove > 0) {
-            return animationResting.getFrame();
+        if (this.yMove > 0) {
+            return this.animationResting.getFrame();
         }
-        if (display.getKey().aLeft) {
-            idle = 0;
-            return animationAttackLeft.getFrame();
+        if (this.display.getKey().aLeft) {
+            this.idle = 0;
+            return this.animationAttackLeft.getFrame();
         }
-        if (display.getKey().aRight) {
-            idle = 1;
-            return animationAttackRight.getFrame();
-        } else if (idle == 0) {
-            return animationIdle.getFrame();
-        } else if (idle == 1) {
-            return animationIdleRight.getFrame();
+        if (this.display.getKey().aRight) {
+            this.idle = 1;
+            return this.animationAttackRight.getFrame();
+        } else if (this.idle == 0) {
+            return this.animationIdle.getFrame();
+        } else if (this.idle == 1) {
+            return this.animationIdleRight.getFrame();
         } else {
-            return animationIdle.getFrame();
+            return this.animationIdle.getFrame();
         }
-
     }
 
+    @Override
     public void die() {
 
     }
-
 }

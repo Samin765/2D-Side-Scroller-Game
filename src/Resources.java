@@ -10,12 +10,14 @@ import java.awt.image.BufferedImage;
  */
 public class Resources {
     public static ImageLoader loader;
-    public static BufferedImage solarSystemBackground, sunBackground, planet1Background, planet2Background, planet3Background, marsBackground, testCharacter, testCharacter2, firePlanet,
-            farPlanet, alienGround, alienBackgroundPlanet, alienGrass, tileSet, jumpLeft, woodbg1, woodbg2, woodbg3,
-            woodbg4, marsDirt, marsGround, marsBridge, marsWater, marsSkull, marsBlock, transparentBlock, jumpRight,
-            testGearDrop, venusBg1, venusBg2, venusBg3, venusBg4, purplePotion, orangePotion, bluePotion,
-            bluePotionBlock, orangePotionBlock, purplePotionBlock, endScreen;
+    public static BufferedImage solarSystemBackground, sunBackground, planet1Background, planet2Background,
+            planet3Background, marsBackground, testCharacter, testCharacter2, firePlanet, farPlanet, alienGround,
+            alienBackgroundPlanet, alienGrass, tileSet, jumpLeft, woodbg1, woodbg2, woodbg3, woodbg4, marsDirt,
+            marsGround, marsBridge, marsWater, marsSkull, marsBlock, transparentBlock, jumpRight, testGearDrop,
+            venusBg1, venusBg2, venusBg3, venusBg4, purplePotion, orangePotion, bluePotion, bluePotionBlock,
+            orangePotionBlock, purplePotionBlock, endScreen;
     public static WorldImages worldImage;
+    public static WorldImages worldImage2;
     public static BufferedImage[] playerLeft;
     public static BufferedImage[] playerRight;
     public static BufferedImage[] playerIdle;
@@ -93,13 +95,13 @@ public class Resources {
         this.endScreen = this.loader.loadImage("../src/Resources/EndScreen.jpg");
 
         // fixa en stor bild med alla bilder vi ska ha med samma width och height
-        this.worldImage = new WorldImages(this.loader.loadImage("../spaceStars.jpeg"));
-        this.worldImage = new WorldImages(this.loader.loadImage("../src/Resources/Mossy - TileSet.png"));
-      
-        this.sunBackground = this.loader.loadImage("../sun.png");
-        this.planet1Background = this.loader.loadImage("../desolate_planet.png");
-        this.planet2Background = this.loader.loadImage("../habitable_planet.png");
-        this.planet3Background = this.loader.loadImage("../scorched_planet.png");
+        this.worldImage = new WorldImages(this.loader.loadImage("../src/Resources/spaceStars.jpeg"));
+        this.worldImage2 = new WorldImages(this.loader.loadImage("../src/Resources/Mossy - TileSet.png"));
+
+        this.sunBackground = this.loader.loadImage("../src/Resources/sun.png");
+        this.planet1Background = this.loader.loadImage("../src/Resources/desolate_planet.png");
+        this.planet2Background = this.loader.loadImage("../src/Resources/habitable_planet.png");
+        this.planet3Background = this.loader.loadImage("../src/Resources/scorched_planet.png");
 
         this.marsBackground = this.loader.loadImage("../src/Resources/marsBackground.png");
 
@@ -146,7 +148,7 @@ public class Resources {
         this.orangePotionBlock = this.loader.loadImage("../src/Resources/2.png");
 
         // delar upp den stora bilden till små.
-        this.tileSet = worldImage.crop(179, 60, 1184, 1250);
+        this.tileSet = worldImage2.crop(179, 60, 1184, 1250);
         this.solarSystemBackground = worldImage.crop(0, 0, WIDTH, HEIGHT);
     }
 }

@@ -15,6 +15,7 @@ public class World {
     private int xSpawn;
     private int ySpawn;
     private int[][] blocks;
+    public static boolean goMars;
     public static boolean goVenus;
     public static boolean endGame;
 
@@ -79,12 +80,12 @@ public class World {
     public void render(Graphics2D g2) {
 
         int xStart = (int) Math.max(0, display.getCamera().getXCamera()); // Either the first
-                                                                                                   // block is rendered
-                                                                                                   // or the shift on
-                                                                                                   // camera divided by
-                                                                                                   // the blockwidth
-                                                                                                   // blocks are
-                                                                                                   // rendered.
+                                                                          // block is rendered
+                                                                          // or the shift on
+                                                                          // camera divided by
+                                                                          // the blockwidth
+                                                                          // blocks are
+                                                                          // rendered.
         int yStart = (int) Math.max(0, display.getCamera().getYCamera());
         int xEnd = (int) Math.min(width,
                 (display.getCamera().getXCamera() + display.getWidth()) / WorldBlocks.blockWidth + 4); // you add the
@@ -92,8 +93,7 @@ public class World {
                                                                                                        // because u want
                                                                                                        // the far right
                                                                                                        // of the screen
-        int yEnd = (int) Math.min(heigth,
-                (display.getCamera().getYCamera()) / WorldBlocks.blockHeigth + 1);
+        int yEnd = (int) Math.min(heigth, (display.getCamera().getYCamera()) / WorldBlocks.blockHeigth + 1);
 
         for (int y = yStart; y < yEnd; y++) {
             for (int x = xStart; x < xEnd; x++) {

@@ -12,27 +12,26 @@ public class Animation {
         this.animation = animation;
         this.index = 0;
         this.timer = 0;
-        time = System.currentTimeMillis();
+        this.time = System.currentTimeMillis();
     }
 
     public void update() {
         // Last time tick was called
-        this.timer = timer + System.currentTimeMillis() - time - 20;
+        this.timer = this.timer + System.currentTimeMillis() - this.time - 20;
         // Resets the counter
         this.time = System.currentTimeMillis();
 
-        if (timer > speed) {
+        if (this.timer > this.speed) {
 
             this.index++;
             this.time = 0;
-            if (index >= animation.length) {
+            if (this.index >= animation.length) {
                 this.index = 0;
             }
         }
-
     }
 
     public BufferedImage getFrame() {
-        return animation[index];
+        return this.animation[this.index];
     }
 }

@@ -25,7 +25,7 @@ public abstract class Entity {
     protected int health;
 
     protected Entity(World world, Display display, float xPos, float yPos, int width, int heigth) { // starting position
-                                                                                                    // of the entity
+                                                                                                    // // of the entity
         this.xPos = xPos;
         this.yPos = yPos;
         this.width = width;
@@ -35,7 +35,7 @@ public abstract class Entity {
         this.alive = true;
         this.health = 40;
 
-        collision = new Rectangle(0, 0, width, heigth);
+        this.collision = new Rectangle(0, 0, this.width, this.heigth);
     }
 
     public void setXPos(float xPos) {
@@ -47,11 +47,11 @@ public abstract class Entity {
     }
 
     public float getXPos() {
-        return xPos;
+        return this.xPos;
     }
 
     public float getYPos() {
-        return yPos;
+        return this.yPos;
     }
 
     public void setWidth(int width) {
@@ -63,15 +63,15 @@ public abstract class Entity {
     }
 
     public int getWidth() {
-        return width;
+        return this.width;
     }
 
     public int getHeigth() {
-        return heigth;
+        return this.heigth;
     }
 
     public boolean isAlive() {
-        return alive;
+        return this.alive;
     }
 
     public void getAlive(boolean alive) {
@@ -83,7 +83,7 @@ public abstract class Entity {
     }
 
     public int getHealth() {
-        return health;
+        return this.health;
     }
 
     public boolean entityCollision(float x, float y) {
@@ -99,15 +99,15 @@ public abstract class Entity {
     }
 
     public Rectangle getCollisionBounds(float x, float y) {
-        return new Rectangle((int) (xPos + collision.x + x), (int) (yPos + collision.y + y), collision.width,
-                collision.height);
+        return new Rectangle((int) (this.xPos + this.collision.x + x), (int) (this.yPos + this.collision.y + y),
+                this.collision.width, this.collision.height);
     }
 
     public void hurt(int hurt) {
-        health -= hurt;
-        if (health <= 0) {
-            alive = false;
-            die();
+        this.health -= hurt;
+        if (this.health <= 0) {
+            this.alive = false;
+            this.die();
         }
     }
 

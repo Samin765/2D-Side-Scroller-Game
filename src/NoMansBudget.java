@@ -84,9 +84,7 @@ public class NoMansBudget implements Runnable {
         while (run) {
             long currentTime = System.nanoTime();
 
-            //
             difference += (currentTime - previousTime) / ticks;
-
             previousTime = currentTime;
 
             // Update every
@@ -127,7 +125,6 @@ public class NoMansBudget implements Runnable {
         // this sets the state to the game. Starts with the state "SolarSystem" if the
         // user for example clicks on a planet the state can be changed to "Mars" etc
         WorldState.setState(this.solarSystem);
-        //WorldState.setState(this.venus);
 
         this.display.frame.add(WorldMaps.planet2);
         this.display.frame.add(this.display);

@@ -19,7 +19,6 @@ public class readFile { // https://mkyong.com/java/how-to-read-file-from-java-bu
         }
 
         return sb.toString();
-
     }
 
     public static int parseInt(String number) { // stackOverflow

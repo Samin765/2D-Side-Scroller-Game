@@ -9,5 +9,4 @@ public class BackgroundBlock extends WorldBlocks {
     public boolean isSolid() {
         return false;
     }
-
 }

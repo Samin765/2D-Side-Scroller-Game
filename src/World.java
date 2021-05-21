@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
  * the display
  * 
  * @author Samin chowdhury
- * @version 2021-05-15
+ * @version 2021-05-21
  */
 public class World {
     private Display display;
@@ -15,7 +15,6 @@ public class World {
     private int xSpawn;
     private int ySpawn;
     private int[][] blocks;
-    public static boolean goMars;
     public static boolean goVenus;
     public static boolean endGame;
 
@@ -34,13 +33,11 @@ public class World {
      */
     public World(Display display, String path, int worldState) {
         this.display = display;
+        this.goVenus = false;
         this.worldState = worldState;
 
-        this.goMars = false;
-        this.goVenus = false;
-
         switch (this.worldState) {
-            case 1: // Mars
+            case 1:
                 this.entityManager = new EntityManager(this, this.display, new Player(this, this.display, 100, 1184));
                 this.itemManager = new ItemManager(this, this.display);
                 this.entityManager.addEntity(new Tree(this, this.display, 0, 1200)); // Blocks that gives jump boost
@@ -50,7 +47,7 @@ public class World {
                 this.entityManager.getPlayer().setXMove(this.xSpawn);
                 this.entityManager.getPlayer().setYMove(this.ySpawn);
                 break;
-            case 2: // Venus
+            case 2:
                 this.entityManager = new EntityManager(this, this.display, new Player(this, this.display, 100, 800));
                 this.itemManager = new ItemManager(this, this.display);
                 this.entityManager.addEntity(new Tree(this, this.display, 0, 1200)); // Blocks that gives jump boost
@@ -77,7 +74,7 @@ public class World {
         if (this.entityManager.getPlayer().getXPos() == 3931) {
             this.goVenus = true;
         }
-        if (this.entityManager.getPlayer().getXPos() == 3931 && this.entityManager.getPlayer().getYPos() <= 500
+        if (this.entityManager.getPlayer().getXPos() == 3931 && entityManager.getPlayer().getYPos() <= 500
                 && this.goVenus) {
             this.endGame = true;
         }
@@ -93,23 +90,25 @@ public class World {
      * @param g2 The graphics engine
      */
     public void render(Graphics2D g2) {
-        int xStart = (int) Math.max(0, this.display.getCamera().getXCamera()); // Either the first
+        int xStart = (int) Math.max(0, this.display.getCamera().getXCamera() / WorldBlocks.blockWidth); // Either the
+                                                                                                        // first
         // block is rendered
         // or the shift on
         // camera divided by
         // the blockwidth
         // blocks are
         // rendered.
-        int yStart = (int) Math.max(0, this.display.getCamera().getYCamera());
+        int yStart = (int) Math.max(0, this.display.getCamera().getYCamera() / WorldBlocks.blockHeight);
         int xEnd = (int) Math.min(this.width,
-                (this.display.getCamera().getXCamera() + this.display.getWidth()) / WorldBlocks.blockWidth + 4); // you
+                (this.display.getCamera().getXCamera() + this.display.getWidth()) / WorldBlocks.blockWidth + 1); // you
                                                                                                                  // add
                                                                                                                  // the
         // display width
         // because u want
         // the far right
         // of the screen
-        int yEnd = (int) Math.min(height, (this.display.getCamera().getYCamera()) / WorldBlocks.blockHeight + 1);
+        int yEnd = (int) Math.min(this.height,
+                (this.display.getCamera().getYCamera() + this.display.getWidth()) / WorldBlocks.blockHeight + 1);
 
         for (int y = yStart; y < yEnd; y++) {
             for (int x = xStart; x < xEnd; x++) {
@@ -117,7 +116,6 @@ public class World {
                         (int) (y * 100 - this.display.getCamera().getYCamera()));
             }
         }
-
         this.itemManager.render(g2);
         this.entityManager.render(g2);
     }
@@ -154,8 +152,8 @@ public class World {
 
         this.blocks = new int[this.width][this.height];
 
-        for (int y = 0; y < this.height; y++) { // read the rest
-            for (int x = 0; x < this.width; x++) {
+        for (int y = 0; y < height; y++) { // read the rest
+            for (int x = 0; x < width; x++) {
                 this.blocks[x][y] = readFile.parseInt(tokens[(x + y * this.width) + 4]); // stackOverFlow, fixes the
                                                                                          // offset of the
                 // blocks.

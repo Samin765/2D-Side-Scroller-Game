@@ -10,7 +10,7 @@ import java.awt.event.KeyEvent;
  */
 public class KeyInput implements KeyListener {
     private boolean[] keys;
-    public boolean up, down, right, left, jump, esc, aUp, aDown, aLeft, aRight, mKey;
+    public boolean up, down, right, left, jump, esc, aUp, aDown, aLeft, aRight, mKey, enterKey;
     private Display display;
 
     final private static long keyReleasedTimeLock = 800L;
@@ -33,7 +33,7 @@ public class KeyInput implements KeyListener {
                 return;
             }
             this.keyReleased = System.currentTimeMillis();
-        } else if (event.getKeyCode() == KeyEvent.VK_M) {
+        } else if (event.getKeyCode() == KeyEvent.VK_M || event.getKeyCode() == KeyEvent.VK_ENTER) {
             SolarSystem.setState(new Mars(this.display));
         }
 
@@ -70,5 +70,6 @@ public class KeyInput implements KeyListener {
         this.aRight = this.keys[KeyEvent.VK_RIGHT];
 
         this.mKey = this.keys[KeyEvent.VK_M];
+        this.enterKey = this.keys[KeyEvent.VK_ENTER];
     }
 }

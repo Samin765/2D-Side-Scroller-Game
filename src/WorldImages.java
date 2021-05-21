@@ -29,6 +29,7 @@ public class WorldImages {
      * @return A portion of the image
      */
     public BufferedImage crop(int x, int y, int width, int height) {
+        // returns a portion of the image so you can "move around in the world"
         return this.image.getSubimage(x, y, width, height);
     }
 }

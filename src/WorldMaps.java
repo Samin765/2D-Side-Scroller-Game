@@ -40,15 +40,6 @@ public class WorldMaps {
     }
 
     /**
-     * A location depicting the planet Mars
-     * 
-     * @param g2 The graphics engine
-     */
-    public void planetMars(Graphics2D g2) {
-        // TODO: Add components etc
-    }
-
-    /**
      * Draws the location's background onto the frame
      * 
      * @param g2    The graphics engine

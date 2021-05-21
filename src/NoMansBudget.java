@@ -1,6 +1,8 @@
 import java.awt.image.BufferStrategy;
 import java.awt.Graphics2D;
 
+// MERGE BRANCH
+
 /**
  * Class NoMansBudget - Creates a two dimensional solar system containing
  * planets orbiting around a star. The planets are clickable and if a planet is
@@ -12,14 +14,15 @@ import java.awt.Graphics2D;
  * @version 2021-05-20
  */
 public class NoMansBudget implements Runnable {
-    private static final long serialVersionUID = 1L;
-    private static boolean run = false;
-    static final String image = "../spaceStars.jpeg";
-
     private Thread thread;
     private Display display;
     private Resources resource;
-    private WorldState gameState;
+    private WorldState solarSystem;
+    private WorldState mars;
+    private WorldState venus;
+
+    private static final long serialVersionUID = 1L;
+    private static boolean run = false;
 
     public NoMansBudget() {
         this.start();
@@ -33,11 +36,11 @@ public class NoMansBudget implements Runnable {
      * Calling this method starts the game in a new thread
      */
     public synchronized void start() {
-        if (run) {
+        if (this.run) {
             return;
         }
 
-        run = true;
+        this.run = true;
 
         this.thread = new Thread(this);
         this.thread.start();
@@ -47,11 +50,11 @@ public class NoMansBudget implements Runnable {
      * Closes the threads running and stops the game
      */
     public synchronized void stop() {
-        if (!run) {
+        if (!this.run) {
             return;
         }
 
-        run = false;
+        this.run = false;
 
         try {
             this.thread.join();
@@ -75,23 +78,21 @@ public class NoMansBudget implements Runnable {
         int fpsCounter = 0;
 
         // Opens the game window
-        initialize();
+        this.initialize();
 
         // The game loop. Runs until run becomes false
-        while (run) {
+        while (this.run) {
             long currentTime = System.nanoTime();
 
-            //
             difference += (currentTime - previousTime) / ticks;
-
             previousTime = currentTime;
 
             // Update every
             while (difference >= 1) {
-                update();
+                this.update();
                 difference--;
 
-                render();
+                this.render();
                 fpsCounter++;
             }
 
@@ -103,7 +104,7 @@ public class NoMansBudget implements Runnable {
             }
         }
 
-        stop();
+        this.stop();
     }
 
     /**
@@ -112,23 +113,31 @@ public class NoMansBudget implements Runnable {
     private void initialize() {
         this.display = new Display();
         this.resource = new Resources();
-        this.gameState = new SolarSystem();
+        this.solarSystem = new SolarSystem();
+
+        // this fixed the issue of mouse clicks stopping the keylistener. Adding this to
+        // the display class directly does not fix the issue for some reason
+        this.display.setFocusable(false);
 
         // this sets the state to the game. Starts with the state "SolarSystem" if the
         // user for example clicks on a planet the state can be changed to "Mars" etc
-        this.gameState.setState(gameState);
+        WorldState.setState(this.solarSystem);
 
-        this.display.frame.add(WorldMaps.planet2);
-        this.display.frame.add(this.display);
-        this.display.frame.pack();
+        // TODO: For who this concerns, implement JButton so they are clickable
+        // this.display.frame.add(WorldMaps.planet2);
+        // this.display.frame.add(this.display);
+        // this.display.frame.pack();
     }
 
     /**
      * Updates the position/state of the components on the display
      */
     private void update() {
-        if (this.gameState.getState() != null) {
-            this.gameState.getState().update();
+        // Checks for user input
+        this.display.getKey().update();
+
+        if (WorldState.getState() != null) {
+            WorldState.getState().update();
         }
     }
 
@@ -145,8 +154,11 @@ public class NoMansBudget implements Runnable {
 
         Graphics2D g2 = (Graphics2D) bs.getDrawGraphics();
 
-        if (this.gameState.getState() != null) {
-            this.gameState.getState().render(g2);
+        // Clears the screen of image residue
+        g2.clearRect(0, 0, 1280, 720);
+
+        if (WorldState.getState() != null) {
+            WorldState.getState().render(g2);
         }
 
         g2.dispose();

@@ -1,6 +1,3 @@
-import java.awt.Color;
-import java.awt.Graphics2D;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyListener;
@@ -25,6 +22,9 @@ public class CharacterMovement extends JPanel implements ActionListener, KeyList
     private int xSpeed;
     private int ySpeed;
 
+    /**
+     * Start the animation and set up keylistener
+     */
     public CharacterMovement() {
         this.animation.start();
         this.addKeyListener(this);
@@ -32,12 +32,9 @@ public class CharacterMovement extends JPanel implements ActionListener, KeyList
         this.setFocusTraversalKeysEnabled(false);
     }
 
-    public void paintComponent(Graphics2D g2) {
-        // super.paintComponent(g2);
-        g2.setColor(Color.RED);
-        g2.fillRect(this.xPos, this.yPos, 100, 100);
-    }
-
+    /**
+     * If the character moves outside the screen, put them at the edge again.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (this.xPos < 0) {
@@ -63,6 +60,9 @@ public class CharacterMovement extends JPanel implements ActionListener, KeyList
         repaint();
     }
 
+    /**
+     * Move in direction depending on the pressed button
+     */
     @Override
     public void keyPressed(KeyEvent event) {
         // Returns what key is pressed
@@ -95,16 +95,25 @@ public class CharacterMovement extends JPanel implements ActionListener, KeyList
         // maybe implement
     }
 
+    /**
+     * Stop moving
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         this.xSpeed = 0;
         this.ySpeed = 0;
     }
 
+    /**
+     * get the character's current x-position
+     */
     public int getX() {
         return this.xPos;
     }
 
+    /**
+     * get the character's current y-position
+     */
     public int getY() {
         return this.yPos;
     }

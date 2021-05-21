@@ -11,7 +11,7 @@ public class World {
     private Display display;
 
     private int width;
-    private int heigth;
+    private int height;
     private int xSpawn;
     private int ySpawn;
     private int[][] blocks;
@@ -24,6 +24,14 @@ public class World {
 
     public int worldState;
 
+    /**
+     * Class World - Determines the 2d world location the player can walk and
+     * interact in
+     * 
+     * @param display    The display
+     * @param path       The image path
+     * @param worldState The new worldstate
+     */
     public World(Display display, String path, int worldState) {
         this.display = display;
         this.worldState = worldState;
@@ -32,7 +40,7 @@ public class World {
         this.goVenus = false;
 
         switch (this.worldState) {
-            case 1:
+            case 1: // Mars
                 this.entityManager = new EntityManager(this, this.display, new Player(this, this.display, 100, 1184));
                 this.itemManager = new ItemManager(this, this.display);
                 this.entityManager.addEntity(new Tree(this, this.display, 0, 1200)); // Blocks that gives jump boost
@@ -42,7 +50,7 @@ public class World {
                 this.entityManager.getPlayer().setXMove(this.xSpawn);
                 this.entityManager.getPlayer().setYMove(this.ySpawn);
                 break;
-            case 2:
+            case 2: // Venus
                 this.entityManager = new EntityManager(this, this.display, new Player(this, this.display, 100, 800));
                 this.itemManager = new ItemManager(this, this.display);
                 this.entityManager.addEntity(new Tree(this, this.display, 0, 1200)); // Blocks that gives jump boost
@@ -58,6 +66,9 @@ public class World {
         }
     }
 
+    /**
+     * Update all entities, objects and items positions/states
+     */
     public void update() {
         this.itemManager.update();
         this.entityManager.update();
@@ -76,6 +87,11 @@ public class World {
         }
     }
 
+    /**
+     * Renders all entities, objects items and images onto the frame
+     * 
+     * @param g2 The graphics engine
+     */
     public void render(Graphics2D g2) {
         int xStart = (int) Math.max(0, this.display.getCamera().getXCamera()); // Either the first
         // block is rendered
@@ -93,7 +109,7 @@ public class World {
         // because u want
         // the far right
         // of the screen
-        int yEnd = (int) Math.min(heigth, (this.display.getCamera().getYCamera()) / WorldBlocks.blockHeigth + 1);
+        int yEnd = (int) Math.min(height, (this.display.getCamera().getYCamera()) / WorldBlocks.blockHeight + 1);
 
         for (int y = yStart; y < yEnd; y++) {
             for (int x = xStart; x < xEnd; x++) {
@@ -106,8 +122,13 @@ public class World {
         this.entityManager.render(g2);
     }
 
+    /**
+     * @param x The block's x-position
+     * @param y The block's y-position
+     * @return A matrix containing the blocks
+     */
     public WorldBlocks getBlock(int x, int y) {
-        if (x < 0 || y < 0 || x >= this.width || y >= this.heigth) {
+        if (x < 0 || y < 0 || x >= this.width || y >= this.height) {
             return WorldBlocks.groundBlock;
         }
         WorldBlocks block = WorldBlocks.blocks[this.blocks[x][y]];
@@ -118,17 +139,22 @@ public class World {
         return block;
     }
 
+    /**
+     * Loads the world's string file make-up
+     * 
+     * @param path The world's string file make-up
+     */
     private void loadWorld(String path) {
         String file = readFile.readFiles(path);
         String[] tokens = file.split("\\s+"); // regex split by space
         this.width = readFile.parseInt(tokens[0]); // reads first line
-        this.heigth = readFile.parseInt(tokens[1]); // reads second line
+        this.height = readFile.parseInt(tokens[1]); // reads second line
         this.xSpawn = readFile.parseInt(tokens[2]); // reads second row, first line
         this.ySpawn = readFile.parseInt(tokens[3]); // reads second row, second line..
 
-        this.blocks = new int[this.width][this.heigth];
+        this.blocks = new int[this.width][this.height];
 
-        for (int y = 0; y < this.heigth; y++) { // read the rest
+        for (int y = 0; y < this.height; y++) { // read the rest
             for (int x = 0; x < this.width; x++) {
                 this.blocks[x][y] = readFile.parseInt(tokens[(x + y * this.width) + 4]); // stackOverFlow, fixes the
                                                                                          // offset of the
@@ -137,18 +163,32 @@ public class World {
         }
     }
 
+    /**
+     * @return Get the world's width
+     */
     public int getWidth() {
         return this.width;
     }
 
-    public int getHeigth() {
-        return this.heigth;
+    /**
+     * get the world's height
+     * 
+     * @return
+     */
+    public int getHeight() {
+        return this.height;
     }
 
+    /**
+     * @return the entity manager
+     */
     public EntityManager getEntityManager() {
         return this.entityManager;
     }
 
+    /**
+     * @return the item manager
+     */
     public ItemManager getItemManager() {
         return this.itemManager;
     }

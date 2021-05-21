@@ -28,6 +28,9 @@ public class Resources {
 
     private static final int WIDTH = 1280, HEIGHT = 720;
 
+    /**
+     * Loads all the images to be used in the program with an ImageLoader
+     */
     public Resources() {
         this.loader = new ImageLoader();
         this.playerLeft = new BufferedImage[8];

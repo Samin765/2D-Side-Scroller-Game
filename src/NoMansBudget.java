@@ -126,9 +126,9 @@ public class NoMansBudget implements Runnable {
         // user for example clicks on a planet the state can be changed to "Mars" etc
         WorldState.setState(this.venus);
 
-        // this.display.frame.add(WorldMaps.planet2);
-        // this.display.frame.add(this.display);
-        // this.display.frame.pack();
+        this.display.frame.add(WorldMaps.planet2);
+        this.display.frame.add(this.display);
+        this.display.frame.pack();
     }
 
     /**

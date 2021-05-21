@@ -7,7 +7,6 @@ import java.awt.Graphics2D;
  * @author Samin chowdhury
  * @version 2021-05-15
  */
-
 public class WorldBlocks {
     public static WorldBlocks[] blocks = new WorldBlocks[20]; // 20 blocks to build the planets with. Increase if
                                                               // neccessary
@@ -24,15 +23,23 @@ public class WorldBlocks {
     public static WorldBlocks transparentBlock = new TransparentBlock(8);
 
     public static int blockWidth = 100;
-    public static int blockHeigth = 100;
+    public static int blockHeight = 100;
 
     protected BufferedImage block;
     protected int id;
 
-    public WorldBlocks(BufferedImage block, int id, int blockWidth, int blockHeigth) {
+    /**
+     * Creates a WorldObject
+     * 
+     * @param block       The object's visuals
+     * @param id          The object's id
+     * @param blockWidth  The object's width
+     * @param blockHeight The object's height
+     */
+    public WorldBlocks(BufferedImage block, int id, int blockWidth, int blockHeight) {
         this.block = block;
         this.id = id;
-        this.blockHeigth = blockHeigth;
+        this.blockHeight = blockHeight;
         this.blockWidth = blockWidth;
 
         // The object you're creating will be inserted into the specificed array index
@@ -40,19 +47,42 @@ public class WorldBlocks {
         this.blocks[this.id] = this;
     }
 
+    /**
+     * Update the object position/state
+     */
     public void update() {
 
     }
 
+    /**
+     * Draw the object onto the frame
+     * 
+     * @param g2   The graphics engine
+     * @param xPos The x-position
+     * @param yPos The y-position
+     */
     public void render(Graphics2D g2, int xPos, int yPos) {
-        g2.drawImage(this.block, xPos, yPos, this.blockWidth, this.blockHeigth, null);
+        g2.drawImage(this.block, xPos, yPos, this.blockWidth, this.blockHeight, null);
     }
 
+    /**
+     * @return the object's id
+     */
     public int getId() {
         return this.id;
     }
 
+    /**
+     * @return if the object is walkthrough/seethrough or not
+     */
     public boolean isSolid() {
         return true;
+    }
+
+    /**
+     * Destroy the object and replace it with a loot item
+     */
+    public void die() {
+
     }
 }

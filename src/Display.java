@@ -28,11 +28,11 @@ public class Display extends Canvas {
      */
     public Display() {
         // Creates the window's frame and dimension
-        this.frame = new JFrame(title);
+        this.frame = new JFrame(this.title);
 
         // Configures the window's dimensions
-        this.size = new Dimension(WIDTH, HEIGHT);
-        this.setPreferredSize(size);
+        this.size = new Dimension(this.WIDTH, this.HEIGHT);
+        this.setPreferredSize(this.size);
 
         this.frame.add(this);
         this.frame.pack();
@@ -46,7 +46,7 @@ public class Display extends Canvas {
 
         // Adds keyListener to the frame
         this.frame.setFocusTraversalKeysEnabled(false);
-        this.frame.addKeyListener(keyInput);
+        this.frame.addKeyListener(this.keyInput);
 
         // Enable visibility
         this.frame.setVisible(true);
@@ -58,18 +58,27 @@ public class Display extends Canvas {
      * @param title The frame's current title
      */
     public void setNewTitle(String title) {
-        this.frame.setTitle(title);
+        this.frame.setTitle(this.title);
     }
 
+    /**
+     * @return the display's canvas
+     */
     public JFrame getFrame() {
-        return frame;
+        return this.frame;
     }
 
+    /**
+     * @return the display's key input
+     */
     public KeyInput getKey() {
-        return keyInput;
+        return this.keyInput;
     }
 
+    /**
+     * @return the display's camera
+     */
     public WorldCamera getCamera() {
-        return worldCamera;
+        return this.worldCamera;
     }
 }

@@ -21,6 +21,9 @@ public class KeyInput implements KeyListener {
         this.display = display;
     }
 
+    /**
+     * Receive key input
+     */
     @Override
     public void keyPressed(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.VK_W || event.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -40,13 +43,18 @@ public class KeyInput implements KeyListener {
 
     }
 
+    /**
+     * Stop receiving key input
+     */
     @Override
     public void keyReleased(KeyEvent event) {
         this.keys[event.getKeyCode()] = false;
     }
 
-    // Player goes "up" if Up arrow or W is pressed, down if S, left if A, right if
-    // D and exit if escape.
+    /**
+     * Interpret key event. Player goes "up" if Up arrow or W is pressed, down if S,
+     * left if A, right if D and exit if escape.
+     */
     public void update() {
         this.jump = this.keys[KeyEvent.VK_W] || this.keys[KeyEvent.VK_SPACE];
         this.down = this.keys[KeyEvent.VK_S];

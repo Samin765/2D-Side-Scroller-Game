@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
  * @version 2021-05-20
  */
 public class SolarSystem extends WorldState {
-    Display display;
+    private Display display;
     private WorldMaps worlds;
     private Graphics2D g2;
 
@@ -50,7 +50,6 @@ public class SolarSystem extends WorldState {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.worlds.planet2) {
             System.out.println("Traveling to Mars...");
-            this.worlds.planet2.setVisible(false);
             SolarSystem.setState(new Mars(this.display));
         }
     }

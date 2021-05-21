@@ -46,6 +46,5 @@ public class Mars extends WorldState {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
     }
 }

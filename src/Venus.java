@@ -2,6 +2,13 @@ import java.awt.Graphics2D;
 
 import java.awt.event.ActionEvent;
 
+/**
+ * Class Venus - A worldstate (gamestate) for the program which will feature a
+ * location depicting a continuation of the planet Mars
+ * 
+ * @author Samin Chowdhury
+ * @version 2021-05-21
+ */
 public class Venus extends WorldState {
     private Player player;
     private World world;
@@ -10,19 +17,23 @@ public class Venus extends WorldState {
 
     /**
      * Loads a new "World" object for Mars Initalizes the player object
+     * 
+     * @param display The display
      */
     public Venus(Display display) {
         this.display = display;
-        world = new World(display, "../src/Resources/worlds/Venus.txt", 2);
+        this.world = new World(this.display, "../src/Resources/worlds/Venus.txt", 2);
     }
 
+    @Override
     public void update() {
-        world.update();
+        this.world.update();
         if (World.endGame) {
             WorldState.setState(new EndScreen());
         }
     }
 
+    @Override
     public void render(Graphics2D g2) {
         // Draw components
         g2.drawImage(Resources.venusBg1, 0, -80, 1280, 800, null); // renders the background first then renders the
@@ -32,7 +43,7 @@ public class Venus extends WorldState {
         g2.drawImage(Resources.venusBg3, 0, -80, 1280, 800, null);
         g2.drawImage(Resources.woodbg4, 0, -80, 1280, 800, null); // renders the background first then renders the
                                                                   // blocks
-        world.render(g2);
+        this.world.render(g2);
     }
 
     @Override

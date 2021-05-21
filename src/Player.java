@@ -34,8 +34,16 @@ public class Player extends Creature {
 
     private int idle;
 
+    /**
+     * Creates a player
+     * 
+     * @param world   the player's start world location
+     * @param display the display
+     * @param xPos    the player's start x-position
+     * @param yPos    the player's start y-position
+     */
     public Player(World world, Display display, float xPos, float yPos) {
-        super(world, display, xPos, yPos, Creature.DEFAULT_WIDTH, Creature.DEFAULT_HEIGTH);
+        super(world, display, xPos, yPos, Creature.DEFAULT_WIDTH, Creature.DEFAULT_HEIGHT);
 
         this.collision.x = 36;
         this.collision.y = 32;
@@ -79,7 +87,7 @@ public class Player extends Creature {
             return;
         }
 
-        Rectangle player = getCollisionBounds(0f, 0f);
+        Rectangle player = this.getCollisionBounds(0f, 0f);
         Rectangle attack = new Rectangle();
         int attackSize = 20;
 
@@ -112,14 +120,17 @@ public class Player extends Creature {
                 e.hurt(20);
                 return;
             }
-
         }
-
     }
 
+    /**
+     * Receive input for the player's actions from the set keybindings
+     */
     private void getPlayerInput() {
         this.xMove = 0;
         this.yMove = 0;
+
+        System.out.println(this.display.getKey().jump);
 
         if (this.display.getKey().jump) {
             float oldYPos = this.yPos;
@@ -149,7 +160,7 @@ public class Player extends Creature {
             System.exit(1);
         }
         if (this.jumping) {
-            int ty2 = (int) (this.yPos - this.jumpSpeed + this.collision.y) / WorldBlocks.blockHeigth;
+            int ty2 = (int) (this.yPos - this.jumpSpeed + this.collision.y) / WorldBlocks.blockHeight;
 
             if (!collisionWithBlock((int) (this.xPos + this.collision.x) / WorldBlocks.blockWidth, ty2)
                     && !collisionWithBlock(
@@ -165,18 +176,21 @@ public class Player extends Creature {
         if (!this.jumping) {
             this.gravity += 0.008f;
             int ty = (int) (this.yPos + (this.fallingSpeed + this.gravity) + this.collision.y + this.collision.height)
-                    / WorldBlocks.blockHeigth;
-            if (!collisionWithBlock((int) (this.xPos + this.collision.x) / WorldBlocks.blockWidth, ty)
-                    && !collisionWithBlock(
+                    / WorldBlocks.blockHeight;
+            if (!this.collisionWithBlock((int) (this.xPos + this.collision.x) / WorldBlocks.blockWidth, ty)
+                    && !this.collisionWithBlock(
                             (int) (this.xPos + this.collision.x + this.collision.width) / WorldBlocks.blockWidth, ty)) {
                 this.yPos += this.fallingSpeed + this.gravity;
             } else { // collision
-                this.yPos = ty * WorldBlocks.blockHeigth - collision.y - collision.height - 1;
+                this.yPos = ty * WorldBlocks.blockHeight - collision.y - collision.height - 1;
                 this.gravity = 0.009f;
             }
         }
     }
 
+    /**
+     * Make the character jump
+     */
     public void jump() {
         this.jumping = true;
         new Thread(new thread()).start();
@@ -202,12 +216,7 @@ public class Player extends Creature {
     @Override
     public void render(Graphics2D g2) {
         g2.drawImage(getCurrentFrame(), (int) (this.xPos - this.display.getCamera().getXCamera()),
-                (int) (this.yPos - this.display.getCamera().getYCamera()), this.width, this.heigth, null);
-
-        // g2.setColor(Color.RED);
-        // g2.fillRect((int) (xPos +collision.x -
-        // display.getCamera().getXCamera()),(int) (yPos +collision.y -
-        // display.getCamera().getYCamera()) ,collision.width, collision.height);
+                (int) (this.yPos - this.display.getCamera().getYCamera()), this.width, this.height, null);
     }
 
     private BufferedImage getCurrentFrame() {

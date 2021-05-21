@@ -115,20 +115,18 @@ public class NoMansBudget implements Runnable {
         this.resource = new Resources();
         this.solarSystem = new SolarSystem();
 
-        this.mars = new Mars(this.display);
-        this.venus = new Venus(this.display);
-
         // this fixed the issue of mouse clicks stopping the keylistener. Adding this to
         // the display class directly does not fix the issue for some reason
         this.display.setFocusable(false);
 
         // this sets the state to the game. Starts with the state "SolarSystem" if the
         // user for example clicks on a planet the state can be changed to "Mars" etc
-        WorldState.setState(this.venus);
+        WorldState.setState(this.solarSystem);
 
-        this.display.frame.add(WorldMaps.planet2);
-        this.display.frame.add(this.display);
-        this.display.frame.pack();
+        // TODO: For who this concerns, implement JButton so they are clickable
+        // this.display.frame.add(WorldMaps.planet2);
+        // this.display.frame.add(this.display);
+        // this.display.frame.pack();
     }
 
     /**

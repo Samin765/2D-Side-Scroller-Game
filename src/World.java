@@ -113,8 +113,8 @@ public class World {
 
         for (int y = yStart; y < yEnd; y++) {
             for (int x = xStart; x < xEnd; x++) {
-                getBlock(x, y).render(g2, (int) (x * 90 - this.display.getCamera().getXCamera()),
-                        (int) (y * 90 - this.display.getCamera().getYCamera()));
+                getBlock(x, y).render(g2, (int) (x * 100 - this.display.getCamera().getXCamera()),
+                        (int) (y * 100 - this.display.getCamera().getYCamera()));
             }
         }
 

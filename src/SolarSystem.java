@@ -22,7 +22,6 @@ public class SolarSystem extends WorldState {
         this.worlds = new WorldMaps();
 
         this.worlds.solarSystem(g2);
-        this.worlds.planet2.addActionListener(this);
     }
 
     @Override
@@ -50,6 +49,7 @@ public class SolarSystem extends WorldState {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.worlds.planet2) {
             System.out.println("Traveling to Mars...");
+            this.worlds.planet2.setFocusable(false);
             SolarSystem.setState(new Mars(this.display));
         }
     }

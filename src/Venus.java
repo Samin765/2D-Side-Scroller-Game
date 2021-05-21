@@ -1,7 +1,5 @@
 import java.awt.Graphics2D;
 
-import java.awt.event.ActionEvent;
-
 /**
  * Class Venus - A worldstate (gamestate) for the program which will feature a
  * location depicting a continuation of the planet Mars
@@ -44,9 +42,5 @@ public class Venus extends WorldState {
         g2.drawImage(Resources.woodbg4, 0, -80, 1280, 800, null); // renders the background first then renders the
                                                                   // blocks
         this.world.render(g2);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
     }
 }

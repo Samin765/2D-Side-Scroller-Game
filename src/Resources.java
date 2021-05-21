@@ -6,16 +6,16 @@ import java.awt.image.BufferedImage;
  * 
  * @author Samin Chowdhury
  * @author Love Lindgren
- * @version 2021-05-20
+ * @version 2021-05-21
  */
 public class Resources {
     public static ImageLoader loader;
     public static BufferedImage solarSystemBackground, sunBackground, planet1Background, planet2Background,
-            planet3Background, marsBackground, testCharacter, testCharacter2, firePlanet, farPlanet, alienGround,
-            alienBackgroundPlanet, alienGrass, tileSet, jumpLeft, woodbg1, woodbg2, woodbg3, woodbg4, marsDirt,
-            marsGround, marsBridge, marsWater, marsSkull, marsBlock, transparentBlock, jumpRight, testGearDrop,
-            venusBg1, venusBg2, venusBg3, venusBg4, purplePotion, orangePotion, bluePotion, bluePotionBlock,
-            orangePotionBlock, purplePotionBlock, endScreen;
+            planet3Background, planet4Background, planet5Background, marsBackground, testCharacter, testCharacter2,
+            firePlanet, farPlanet, alienGround, alienBackgroundPlanet, alienGrass, tileSet, jumpLeft, woodbg1, woodbg2,
+            woodbg3, woodbg4, marsDirt, marsGround, marsBridge, marsWater, marsSkull, marsBlock, transparentBlock,
+            jumpRight, testGearDrop, venusBg1, venusBg2, venusBg3, venusBg4, purplePotion, orangePotion, bluePotion,
+            bluePotionBlock, orangePotionBlock, purplePotionBlock, endScreen;
     public static WorldImages worldImage;
     public static WorldImages worldImage2;
     public static BufferedImage[] playerLeft;
@@ -105,6 +105,8 @@ public class Resources {
         this.planet1Background = this.loader.loadImage("../src/Resources/desolate_planet.png");
         this.planet2Background = this.loader.loadImage("../src/Resources/habitable_planet.png");
         this.planet3Background = this.loader.loadImage("../src/Resources/scorched_planet.png");
+        this.planet4Background = this.loader.loadImage("../src/Resources/gas_planet.png");
+        this.planet5Background = this.loader.loadImage("../src/Resources/icy_planet.png");
 
         this.testCharacter = this.loader.loadImage("../src/Resources/LightBandit_idle_0.png");
 

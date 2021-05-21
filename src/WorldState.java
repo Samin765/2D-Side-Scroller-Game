@@ -1,17 +1,14 @@
 import java.awt.Graphics2D;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 /**
  * Class WorldState - Abstract class used to switch between locations throughout
  * the game.
  * 
  * @author Samin Chowdhury
  * @author Love Lindgren
- * @version 2021-05-20
+ * @version 2021-05-21
  */
-public abstract class WorldState implements ActionListener {
+public abstract class WorldState {
     private static WorldState currentState = null;
 
     /**
@@ -42,10 +39,4 @@ public abstract class WorldState implements ActionListener {
      * @param g2 The graphics engine
      */
     public abstract void render(Graphics2D g2);
-
-    /**
-     * Changes the location on certain clicks
-     */
-    @Override
-    public abstract void actionPerformed(ActionEvent e);
 }

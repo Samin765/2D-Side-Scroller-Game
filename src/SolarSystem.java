@@ -1,14 +1,12 @@
 import java.awt.Graphics2D;
 
-import java.awt.event.ActionEvent;
-
 /**
  * Class SolarSystem - A worldstate (gamestate) for the program which will
  * feature a location depicting a solar system.
  * 
  * @author Love Lindgren
  * @author Samin Chowdhury
- * @version 2021-05-20
+ * @version 2021-05-21
  */
 public class SolarSystem extends WorldState {
     private Display display;
@@ -29,6 +27,8 @@ public class SolarSystem extends WorldState {
         this.worlds.planet1.move(this.worlds.sun.getX(), this.worlds.sun.getY() + 50, true);
         this.worlds.planet2.move(this.worlds.sun.getX() + 60, this.worlds.sun.getY(), false);
         this.worlds.planet3.move(this.worlds.sun.getX() - 10, this.worlds.sun.getY() + 50, true);
+        this.worlds.planet4.move(this.worlds.sun.getX() - 35, this.worlds.sun.getY() + 50, true);
+        this.worlds.planet5.move(this.worlds.sun.getX() + 30, this.worlds.sun.getY(), false);
     }
 
     @Override
@@ -40,17 +40,7 @@ public class SolarSystem extends WorldState {
         this.worlds.planet1.draw(g2, Resources.planet1Background);
         this.worlds.planet2.draw(g2, Resources.planet2Background);
         this.worlds.planet3.draw(g2, Resources.planet3Background);
-    }
-
-    /**
-     * Changes location if a specific circle is clicked
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.worlds.planet2) {
-            System.out.println("Traveling to Mars...");
-            this.worlds.planet2.setFocusable(false);
-            SolarSystem.setState(new Mars(this.display));
-        }
+        this.worlds.planet4.draw(g2, Resources.planet4Background);
+        this.worlds.planet5.draw(g2, Resources.planet5Background);
     }
 }

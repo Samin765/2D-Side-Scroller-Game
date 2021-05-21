@@ -7,7 +7,7 @@ import java.awt.Rectangle;
  * Class Player - Creates the player object and handles keyboard inputs
  * 
  * @author Samin chowdhury
- * @version 2021-05-15
+ * @version 2021-05-21
  */
 public class Player extends Creature {
     private Animation animationLeft;
@@ -129,8 +129,6 @@ public class Player extends Creature {
     private void getPlayerInput() {
         this.xMove = 0;
         this.yMove = 0;
-
-        System.out.println(this.display.getKey().jump);
 
         if (this.display.getKey().jump) {
             float oldYPos = this.yPos;

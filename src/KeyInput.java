@@ -6,7 +6,8 @@ import java.awt.event.KeyEvent;
  * array
  * 
  * @author Samin chowdhury
- * @version 2021-05-15
+ * @author Love Lindgren
+ * @version 2021-05-21
  */
 public class KeyInput implements KeyListener {
     private boolean[] keys;

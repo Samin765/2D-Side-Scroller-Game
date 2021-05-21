@@ -9,14 +9,14 @@ import javax.swing.JButton;
  * 
  * @author Love Lindgren
  * @author Samin Chowdhury
- * @version 2021-05-20
+ * @version 2021-05-21
  */
 public class WorldMaps {
     private Display display;
     private BufferedImage img;
     private ImageLoader loader;
 
-    public static Circle sun, planet1, planet2, planet3;
+    public static Circle sun, planet1, planet2, planet3, planet4, planet5;
 
     /**
      * Creates an object capable of rendering images
@@ -37,6 +37,8 @@ public class WorldMaps {
         this.planet1 = new Circle(640, 60, 15);
         this.planet2 = new Circle(450, 360, 30);
         this.planet3 = new Circle(550, 320, 25);
+        this.planet4 = new Circle(640, 660, 50);
+        this.planet5 = new Circle(140, 360, 20);
     }
 
     /**

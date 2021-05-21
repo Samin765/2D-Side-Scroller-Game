@@ -1,8 +1,6 @@
 import java.awt.image.BufferStrategy;
 import java.awt.Graphics2D;
 
-// MERGE BRANCH
-
 /**
  * Class NoMansBudget - Creates a two dimensional solar system containing
  * planets orbiting around a star. The planets are clickable and if a planet is
@@ -11,7 +9,7 @@ import java.awt.Graphics2D;
  * 
  * @author Love Lindgren
  * @author Samin Chowdhury
- * @version 2021-05-20
+ * @version 2021-05-21
  */
 public class NoMansBudget implements Runnable {
     private Thread thread;

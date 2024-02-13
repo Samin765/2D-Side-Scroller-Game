@@ -1,8 +1,4 @@
-# INDA-Project
-Group project for the INDA course DD1349
-
-
-## Project description:
+## Game description:
 Our project idea is to create a simulation of a two dimensional solar system with orbiting planets. These orbiting planets will be clickable and when one of these planets is clicked, the player will be transported to that planet. On the planet the user can walk around in a Super Mario style 2D world. The end-goal of the program is for the player to reach the end of that planet, by traversing the terrain and interacting with the environment.
 
 ## Libraries, framewerks and methods:
